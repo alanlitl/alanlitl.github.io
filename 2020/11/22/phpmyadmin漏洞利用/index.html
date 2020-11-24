@@ -238,7 +238,7 @@
 
 <p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-211450.jpg" srcset="/img/loading.gif"></p>
 <h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><blockquote>
-<p>使用爆破工具 , 或者得到账号密码直接登录</p>
+<p>使用爆破工具 , 或者得到账号密码 直接登录</p>
 </blockquote>
 <h3 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h3><pre><code class="hljs xquery">条件
 
@@ -453,11 +453,11 @@ SHOW VARIABLES LIKE &quot;general_log%&quot;;</code></pre>
 <pre><code class="hljs awk">searchsploit phpmyadmin
 python3 <span class="hljs-number">40185</span>.py   -u root - root -d test -c <span class="hljs-string">&quot;system(whoami)&quot;</span> http:<span class="hljs-regexp">//i</span>p:port/</code></pre>
 
-<h3 id="CVE-2018-19968"><a href="#CVE-2018-19968" class="headerlink" title="CVE-2018-19968"></a>CVE-2018-19968</h3><p>影响版本: phpMyAdmin 4.8.0~4.8.3</p>
-<p>原因</p>
-<blockquote>
+<h3 id="CVE-2018-19968"><a href="#CVE-2018-19968" class="headerlink" title="CVE-2018-19968"></a>CVE-2018-19968</h3><blockquote>
 <p>参考: <a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/3634">https://xz.aliyun.com/t/3634</a></p>
 </blockquote>
+<p>影响版本: phpMyAdmin 4.8.0~4.8.3</p>
+<p>原因</p>
 <pre><code class="hljs dns">Transformation是phpMyAdmin中的一个高级功能，通过Transformation可以对每个字段的内容使用不同的转换，每个字段中的内容将被预定义的规则所转换。比如我们有一个存有文件名的字段 ‘Filename’，正常情况下 phpMyAdmin 只会将路径显示出来。但是通过Transformation我们可以将该字段转换成超链接，我们就能直接在 phpMyAdmin 中点击并在浏览器的新窗口中看到这个文件。
 
 通常情况下Transformation的规则存储在每个数据库的pma__column_info表中，而在phpMyAdmin <span class="hljs-number">4.8.0~4</span>.<span class="hljs-number">8</span>.<span class="hljs-number">3</span>版本中，由于对转换参数处理不当，导致了任意文件包含漏洞的出现。</code></pre>

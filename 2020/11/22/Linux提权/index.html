@@ -233,7 +233,7 @@
 <pre><code class="hljs gcode">修饰文件夹  文件只有自己和root用户可以修改
 如/tmp目录 所以用户都可创建修改自己文件, 但无法修改其他用户文件<span class="hljs-comment">(无论是否同一个组)</span></code></pre>
 
-<p>SGID?</p>
+<p>SGID</p>
 <pre><code class="hljs erlang-repl">用于目录，在该目录下建立的所有文件和目录，属组都继承该目录的属组，且该组内其他成员修改目录内的文件时，其属主和属组都不改变!!  
 chmod g+s 目录
 当修改文件两个用户是other(other和组内成员)时会改变所属主(所属组不变)</code></pre>
