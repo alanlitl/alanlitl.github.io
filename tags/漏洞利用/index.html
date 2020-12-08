@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="alanlitl">
   <meta name="keywords" content="">
-  <title>alanlitl-blog</title>
+  <title>标签 - 漏洞利用 - alanlitl-blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -47,7 +47,7 @@
 
 
 <body>
-  <header style="height: 100vh;">
+  <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -146,17 +146,13 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="好好学习 天天向上">
+            <span class="h2" id="subtitle" title="标签 - 漏洞利用">
               
             </span>
 
             
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -167,221 +163,34 @@
     
       <div class="container nopadding-md">
         <div class="py-5" id="board"
-          style=margin-top:0>
+          >
           
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-
-  <div class="row mx-auto index-card">
+<div class="list-group">
+  <p class="h4">共计 2 篇文章</p>
+  <hr>
+  
+  
     
+      
+      <p class="h5">2020</p>
     
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/12/08/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%BC%8F%E6%B4%9E/">中间件漏洞</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/12/08/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%BC%8F%E6%B4%9E/">
-          
-          
-            
-          
-          apachephp常见运行方式有 apache的模块模式(分为mod_php和mod_cgi) cgi模式, fast-cgi模式
-
-cgi模式就是建立在多进程上的, 但是cgi的每一次请求都会有启动和退出的过程(fork-and-execute模式, 启动脚本解析器解析php.ini 初始化运行环境, 载入dll), 这在高并发时性能非常弱.
-
-fast-cgi就是为了解决cgi的问题而诞生的,
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-08 19:06" pubdate>
-              2020-12-08
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">漏洞利用</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
+    <a href="/2020/12/08/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%BC%8F%E6%B4%9E/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">中间件漏洞</span>
+      <time style="float: right;">12-08</time>
+    </a>
+  
     
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/11/22/Linux%E6%8F%90%E6%9D%83/">Linux提权</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/22/Linux%E6%8F%90%E6%9D%83/">
-          
-          
-            
-          
-          SUID提权SUID GUID Stickybitsuid  4 ,  sgid 2 , Stickybit(粘滞位)  1
-Umask: root的umask为0022 ,第一位是上一排提到的, 所以创建文件时就是777-022=755, 文件就是 755-111=644 除去x(执行权)
-Stickybit(粘滞位)
-修饰文件夹  文件只有自己和root用户可以修改
-如/tmp目录 所以用户都
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-22 17:33" pubdate>
-              2020-11-22
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%8F%90%E6%9D%83/">提权</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/11/22/phpmyadmin%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">phpmyadmin漏洞利用</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/22/phpmyadmin%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">
-          
-          
-            
-          
-          phpmyadmin漏洞利用获取版本信息访问
-readme.php
-README
-changelog.php
-Change
-Documetation.html
-Documetation.txt
-translators.html
-
-
-getshell
-使用爆破工具 , 或者得到账号密码 直接登录
-
-写入文件条件
-
-拥有root权限
-网站路径
-拥有写权限
-
-
-获取路径方法
-
-phpinfo  
-某些网
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-22 16:57" pubdate>
-              2020-11-22
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">漏洞利用</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/11/22/MYSQL%E6%8F%90%E6%9D%83%E5%A4%8D%E7%8E%B0/">MYSQL提权复现</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/22/MYSQL%E6%8F%90%E6%9D%83%E5%A4%8D%E7%8E%B0/">
-          
-          
-            
-          
-          [toc]
-mysql写权限
-查询写权限
-show variables like &quot;secure_file_priv&quot;;
-查询结果不能为null
-
-
-修改配置文件 windows下为my.ini   linux为my.cnf
-secure_file_priv =’’ 
-null为不允许导入导出
-空白则为任意
-/tmp则为只能在/tmp目录下
-
-查看mysql pulgin文件目
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-22 16:21" pubdate>
-              2020-11-22
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%8F%90%E6%9D%83/">提权</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+    <a href="/2020/11/22/phpmyadmin%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">phpmyadmin漏洞利用</span>
+      <time style="float: right;">11-22</time>
+    </a>
+  
+</div>
 
 
 
