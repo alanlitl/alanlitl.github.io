@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      926 字
+      981 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      13
        分钟
     </span>
   
@@ -397,7 +397,17 @@ L.data[p] = e;</code></pre>
 int b<span class="hljs-comment">;</span>
 <span class="hljs-attribute">b</span> = S -&gt; data<span class="hljs-comment">;</span></code></pre>
 
-<h3 id="链表的建立"><a href="#链表的建立" class="headerlink" title="链表的建立"></a>链表的建立</h3><h4 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h4><pre><code class="hljs plain"></code></pre>
+<h3 id="链表的建立"><a href="#链表的建立" class="headerlink" title="链表的建立"></a>链表的建立</h3><h3 id="取第i个元素"><a href="#取第i个元素" class="headerlink" title="取第i个元素"></a>取第<code>i</code>个元素</h3><pre><code class="hljs c"><span class="hljs-function">Linklist <span class="hljs-title">ListGet</span><span class="hljs-params">(linklist L,<span class="hljs-keyword">int</span>)</span>  <span class="hljs-comment">//取第i个元素&#123;p=L-&gt;next;j=1;</span></span>
+<span class="hljs-function">    <span class="hljs-title">While</span><span class="hljs-params">(p&amp;&amp;j&lt;i)</span></span>&#123;
+        p=p-&gt;next;++j;    <span class="hljs-comment">//指针后移</span>
+    &#125;    
+    If(!p||j&gt;i)
+        <span class="hljs-keyword">return</span> error;
+   	e=p-&gt;data;
+    Return OK;
+&#125;</code></pre>
+
+<h4 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h4><pre><code class="hljs plain"></code></pre>
 
 
 
