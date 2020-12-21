@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="alanlitl">
+  <meta name="keywords" content="">
+  <title>数据结构 - alanlitl-blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"alanlitl.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>alanlitl</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据结构">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-21 21:59" pubdate>
+        2020年12月21日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      926 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据结构</h1>
+            
+            <div class="markdown-body">
+              <h1 id="数据结构术语"><a href="#数据结构术语" class="headerlink" title="数据结构术语"></a>数据结构术语</h1><pre><code class="hljs reasonml">结构是指数据间的关系
+
+数据结构是指 相互之间存在某种特定关系的数据元素的集合
+
+数据结构包括三方面
+	数据的逻辑结构
+	数据的存储结构
+	数据的运算
+一个算法的设计取决于选定的逻辑结构，算法的实现依赖于采用的存储结构
+	
+线性 一对一
+树状 一对多
+网状 多对多
+
+数据结构是一个二元组 (D,R), D是数据元素的有限集, R是D上关系的有限集
+
+数据结构的<span class="hljs-number">5</span>个重要特性 (算法的特征)
+有穷性
+确定性
+可行性
+输入, 输出
+
+算法要求
+可读性 健壮性 效率与储存需求
+
+时间复杂度排序
+<span class="hljs-constructor">O(1)</span> &lt; <span class="hljs-constructor">O(<span class="hljs-params">log</span>₂<span class="hljs-params">n</span>)</span> &lt; <span class="hljs-constructor">O(<span class="hljs-params">n</span>)</span> &lt; <span class="hljs-constructor">O(<span class="hljs-params">n</span><span class="hljs-operator">*</span><span class="hljs-params">log</span>₂<span class="hljs-params">n</span> )</span> &lt; <span class="hljs-constructor">O(<span class="hljs-params">n2</span>)</span>&lt; <span class="hljs-constructor">O(<span class="hljs-params">n3</span>)</span>…&lt;<span class="hljs-constructor">O(2n)</span>&lt;<span class="hljs-constructor">O(3n)</span>&lt;…&lt;<span class="hljs-constructor">O(<span class="hljs-params">n</span>!)</span>
+</code></pre>
+
+
+
+<h1 id="顺序线性表"><a href="#顺序线性表" class="headerlink" title="顺序线性表"></a>顺序线性表</h1><h2 id="0-线性表类型定义"><a href="#0-线性表类型定义" class="headerlink" title="0.线性表类型定义"></a>0.线性表类型定义</h2><pre><code class="hljs plain">同一性
+有穷性
+有序性</code></pre>
+
+
+
+<h2 id="1-顺序表定义"><a href="#1-顺序表定义" class="headerlink" title="1. 顺序表定义"></a>1. 顺序表定义</h2><ul>
+<li>定义</li>
+</ul>
+<pre><code class="hljs arduino"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span>
+<span class="hljs-class">&#123;</span>
+	<span class="hljs-keyword">char</span> data[<span class="hljs-built_in">max</span>]; <span class="hljs-comment">//数据(数组)</span>
+	<span class="hljs-keyword">int</span> length;   <span class="hljs-comment">//长度</span>
+&#125;sqlist,L  <span class="hljs-comment">//结构体名</span></code></pre>
+
+<ul>
+<li>读取数据(点操作)</li>
+</ul>
+<pre><code class="hljs c">读取表里面的数据
+<span class="hljs-keyword">int</span> A;
+A = sqlist.data[i];
+
+读取表长
+<span class="hljs-keyword">int</span> lenght;
+length = sqlist.length;</code></pre>
+
+<h2 id="2-顺序表相关操作"><a href="#2-顺序表相关操作" class="headerlink" title="2. 顺序表相关操作"></a>2. 顺序表相关操作</h2><ul>
+<li><p>初始化</p>
+<pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">initList</span><span class="hljs-params">(SqList &amp;L)</span></span>&#123;
+	L.length = <span class="hljs-number">0</span>;
+&#125;</code></pre>
+</li>
+<li><p>插入数据</p>
+<pre><code class="hljs c"><span class="hljs-comment">//L为结构体, i为插入位置, e为插入元素</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sqLiistInsert</span><span class="hljs-params">(sqlist &amp;L, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">char</span> e)</span></span>&#123;
+    <span class="hljs-comment">//处理特殊情况</span>
+    <span class="hljs-keyword">if</span>(i&lt;<span class="hljs-number">1</span>||i&gt;L.length)&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    &#125;
+    <span class="hljs-comment">//判断是否满</span>
+    <span class="hljs-keyword">if</span>(L.length&gt;=L.size)&#123;
+        ......
+    &#125;
+    <span class="hljs-comment">//具体插入操作</span>
+    <span class="hljs-keyword">char</span> *p, *q;
+    q = &amp;(L.elem[i<span class="hljs-number">-1</span>]); <span class="hljs-comment">//将q赋值为第i个元素的位置(因为是获取的地址,不是值), 从第i个元素开始就要向后移动一位</span>
+    <span class="hljs-comment">//for循环中, p为最后一个元素的位置, 依次将最后一个元素, 倒数第二个元素...向后移动一位, 直到插入元素i的位置</span>
+    <span class="hljs-keyword">for</span>(p = &amp;(L.data[L.length<span class="hljs-number">-1</span>]), p&gt;=q; p--)&#123;
+        *(p+<span class="hljs-number">1</span>) = *p; <span class="hljs-comment">//元素依次向后移动一位</span>
+    &#125;
+    
+    <span class="hljs-comment">//将新元素赋值到i的位置</span>
+    *q = e;
+    
+    <span class="hljs-comment">//长度加一</span>
+    L.length++;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+
+<pre><code class="hljs c"><span class="hljs-comment">//其他移动方法</span>
+<span class="hljs-keyword">for</span>(i = L.length - <span class="hljs-number">1</span>, i &gt;= p, i--)&#123;
+    L.data[i+<span class="hljs-number">1</span>] = L.data[i];
+&#125;
+L.data[p] = e;</code></pre>
+
+<p>​    插入时间复杂度</p>
+<pre><code class="hljs excel">平均 <span class="hljs-built_in">n</span>/<span class="hljs-number">2</span>, 最坏 <span class="hljs-built_in">n</span></code></pre>
+</li>
+<li><p>删除数据</p>
+<pre><code class="hljs c"><span class="hljs-comment">//i为删除元素的位置, y为返回删除元素</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">delete</span><span class="hljs-params">(Sqlist &amp;L, <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> *y)</span></span>&#123;
+	<span class="hljs-keyword">int</span> j;
+    <span class="hljs-comment">//删除位置错误</span>
+    <span class="hljs-keyword">if</span>(x&lt;<span class="hljs-number">1</span> || x&gt;Llength)&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    &#125;
+    <span class="hljs-keyword">else</span>&#123;
+        *y = L.data[i<span class="hljs-number">-1</span>];
+        <span class="hljs-comment">//j为要删除的位置, 将后面的元素依次向前移动一位</span>
+        <span class="hljs-keyword">for</span>(j=x; j&lt;=Length<span class="hljs-number">-1</span>; j++)&#123;
+            L.data[j<span class="hljs-number">-1</span>] = L.data[j];
+        &#125;
+        L.length--;
+    &#125;
+&#125;</code></pre>
+
+<p>  删除时间复杂度</p>
+<pre><code class="hljs excel">(<span class="hljs-built_in">n</span>-<span class="hljs-number">1</span>)/<span class="hljs-number">2</span></code></pre>
+
+
+</li>
+</ul>
+<ul>
+<li><p>按值查找</p>
+<pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">finddata</span><span class="hljs-params">(Sqlist &amp;L, <span class="hljs-keyword">int</span> e)</span></span>&#123;
+    <span class="hljs-keyword">int</span> i;
+    <span class="hljs-keyword">for</span>(i =<span class="hljs-number">0</span>; i &lt; L.length; i++)&#123;
+        <span class="hljs-keyword">if</span>(e == L.data[i])
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+&#125;</code></pre>
+</li>
+<li><p>无序表合并</p>
+<pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mergelist</span><span class="hljs-params">(<span class="hljs-built_in">list</span> la, <span class="hljs-built_in">list</span> lb, <span class="hljs-built_in">list</span> &amp;lc)</span></span>&#123;
+    initlist(lc)<span class="hljs-comment">//初始化</span>
+    <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>, j = <span class="hljs-number">1</span>, k = <span class="hljs-number">0</span>;
+    la_len = listlength(la);
+    lb_len = listlength(lb);
+    
+    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">1</span>; i &lt; lb_len; i++)&#123;
+        e = listget(lb,i) <span class="hljs-comment">//获取lb中的元素</span>
+        <span class="hljs-keyword">if</span>(!listlocal(la, e))&#123; <span class="hljs-comment">//在la中无此元素</span>
+            listinsert(la,++la_len, e)<span class="hljs-comment">//插入元素</span>
+        &#125;
+    &#125;
+&#125;</code></pre>
+</li>
+<li><p>缺点</p>
+<pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 插入和删除操作时需要移动大量元素。
+<span class="hljs-bullet">2.</span> 要给长度变化较大的线性表预先分配空间，利用率不好。
+<span class="hljs-bullet">3.</span> 表的容量难以扩充</code></pre>
+
+</li>
+</ul>
+<h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><blockquote>
+<p>特点: 用一组任意的存储单元存储线性表的数据元素（可连续可不连续）</p>
+</blockquote>
+<h2 id="1-单链表"><a href="#1-单链表" class="headerlink" title="1. 单链表"></a>1. 单链表</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Lnode</span></span>
+<span class="hljs-class">&#123;</span>
+	<span class="hljs-keyword">int</span> data;
+	Struct Lnode *next;
+&#125;Lnode,*linklist;</code></pre>
+
+<p>取用data</p>
+<pre><code class="hljs abnf">Lnode S<span class="hljs-comment">;</span>
+int b<span class="hljs-comment">;</span>
+<span class="hljs-attribute">b</span> = S -&gt; data<span class="hljs-comment">;</span></code></pre>
+
+<h3 id="链表的建立"><a href="#链表的建立" class="headerlink" title="链表的建立"></a>链表的建立</h3><h4 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h4><pre><code class="hljs plain"></code></pre>
+
+
+
+
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/08/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%BC%8F%E6%B4%9E/">
+                        <span class="hidden-mobile">中间件漏洞</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
