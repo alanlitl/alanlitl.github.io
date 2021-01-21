@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="alanlitl">
   <meta name="keywords" content="">
-  <title>alanlitl-blog</title>
+  <title>归档 - alanlitl-blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -47,7 +47,7 @@
 
 
 <body>
-  <header style="height: 100vh;">
+  <header style="height: 60vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -146,17 +146,13 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="好好学习 天天向上">
+            <span class="h2" id="subtitle" title="归档">
               
             </span>
 
             
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -167,326 +163,28 @@
     
       <div class="container nopadding-md">
         <div class="py-5" id="board"
-          style=margin-top:0>
+          >
           
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-
-  <div class="row mx-auto index-card">
+<div class="list-group">
+  <p class="h4">共计 6 篇文章</p>
+  <hr>
+  
+  
     
+      
+      <p class="h5">2021</p>
     
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/21/vulnstack-%E7%BA%A2%E9%98%9F%E4%B8%80/">vulnstack 红队一</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/21/vulnstack-%E7%BA%A2%E9%98%9F%E4%B8%80/">
-          
-          
-            
-          
-          环境搭建配置网卡
-
-编辑-&gt;虚拟网络编辑器
-
-
-自定义为仅主机模式
-配置win7网络
-添加两块网卡,一块为VMnet1(仅主机模式),一块为VMnet8(net模式连通外网)
-配置VMnet1网卡 (win7)
-
-DNS服务器是windows server的ip, vulnstack配置好了
-使用win7 ping一下 windows server, 能ping同则成功
-配置好后加入域
-
-控
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-21 18:44" pubdate>
-              2021-01-21
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/12/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/12/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-          
-          
-            
-          
-          数据结构术语结构是指数据间的关系
-
-数据结构是指 相互之间存在某种特定关系的数据元素的集合
-
-数据结构包括三方面
-	数据的逻辑结构
-	数据的存储结构
-	数据的运算
-一个算法的设计取决于选定的逻辑结构，算法的实现依赖于采用的存储结构
-	
-线性 一对一
-树状 一对多
-网状 多对多
-
-数据结构是一个二元组 (D,R), D是数据元素的有限集, R是D上关系的有限集
-
-数据结构的5个重要特性 (算法的特征
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-21 21:59" pubdate>
-              2020-12-21
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/12/08/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%BC%8F%E6%B4%9E/">中间件漏洞</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/12/08/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%BC%8F%E6%B4%9E/">
-          
-          
-            
-          
-          apachephp常见运行方式有 apache的模块模式(分为mod_php和mod_cgi) cgi模式, fast-cgi模式
-
-cgi模式就是建立在多进程上的, 但是cgi的每一次请求都会有启动和退出的过程(fork-and-execute模式, 启动脚本解析器解析php.ini 初始化运行环境, 载入dll), 这在高并发时性能非常弱.
-
-fast-cgi就是为了解决cgi的问题而诞生的,
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-08 19:06" pubdate>
-              2020-12-08
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">漏洞利用</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/11/22/Linux%E6%8F%90%E6%9D%83/">Linux提权</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/22/Linux%E6%8F%90%E6%9D%83/">
-          
-          
-            
-          
-          SUID提权SUID GUID Stickybitsuid  4 ,  sgid 2 , Stickybit(粘滞位)  1
-Umask: root的umask为0022 ,第一位是上一排提到的, 所以创建文件时就是777-022=755, 文件就是 755-111=644 除去x(执行权)
-Stickybit(粘滞位)
-修饰文件夹  文件只有自己和root用户可以修改
-如/tmp目录 所以用户都
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-22 17:33" pubdate>
-              2020-11-22
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%8F%90%E6%9D%83/">提权</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/11/22/phpmyadmin%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">phpmyadmin漏洞利用</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/22/phpmyadmin%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">
-          
-          
-            
-          
-          phpmyadmin漏洞利用获取版本信息访问
-readme.php
-README
-changelog.php
-Change
-Documetation.html
-Documetation.txt
-translators.html
-
-
-getshell
-使用爆破工具 , 或者得到账号密码 直接登录
-
-写入文件条件
-
-拥有root权限
-网站路径
-拥有写权限
-
-
-获取路径方法
-
-phpinfo  
-某些网
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-22 16:57" pubdate>
-              2020-11-22
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">漏洞利用</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/11/22/MYSQL%E6%8F%90%E6%9D%83%E5%A4%8D%E7%8E%B0/">MYSQL提权复现</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/22/MYSQL%E6%8F%90%E6%9D%83%E5%A4%8D%E7%8E%B0/">
-          
-          
-            
-          
-          [toc]
-mysql写权限
-查询写权限
-show variables like &quot;secure_file_priv&quot;;
-查询结果不能为null
-
-
-修改配置文件 windows下为my.ini   linux为my.cnf
-secure_file_priv =’’ 
-null为不允许导入导出
-空白则为任意
-/tmp则为只能在/tmp目录下
-
-查看mysql pulgin文件目
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-22 16:21" pubdate>
-              2020-11-22
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%8F%90%E6%9D%83/">提权</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+    <a href="/2021/01/21/vulnstack-%E7%BA%A2%E9%98%9F%E4%B8%80/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">vulnstack 红队一</span>
+      <time style="float: right;">01-21</time>
+    </a>
+  
+</div>
 
 
 

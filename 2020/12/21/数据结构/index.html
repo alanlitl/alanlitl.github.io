@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      1.7k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      22
+      24
        分钟
     </span>
   
@@ -452,6 +452,24 @@ e = q-&gt;data;
     Return L;
 &#125;</code></pre>
 
+<h3 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h3><pre><code class="hljs c"><span class="hljs-function">Linklist <span class="hljs-title">linklistcreate</span><span class="hljs-params">()</span><span class="hljs-comment">//头插</span></span>
+<span class="hljs-function"></span>&#123;
+Linklist L；
+L=(Lnode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(Lnode));  <span class="hljs-comment">//*生成头结点L</span>
+L-&gt;next=<span class="hljs-literal">NULL</span>;   
+<span class="hljs-built_in">scanf</span>(&amp;x);
+<span class="hljs-keyword">while</span>(x!=flag)
+&#123;s=(Lnode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(Lnode));   <span class="hljs-comment">//生成新结点</span>
+S-&gt;data=x;                  <span class="hljs-comment">//新结点赋值</span>
+s-&gt;next=<span class="hljs-literal">NULL</span>; 
+s-&gt;next=L-&gt;next;  <span class="hljs-comment">//两根链的改变，将新结点加入链表中</span>
+L-&gt;next=s;      
+<span class="hljs-built_in">scanf</span>(&amp;x);
+&#125;
+<span class="hljs-keyword">return</span> L;
+&#125;
+</code></pre>
+
 
 
 <h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MergeList_L</span><span class="hljs-params">(LinkList &amp;La,LinkList &amp;Lb,LinkList &amp;Lc)</span></span>
@@ -517,13 +535,7 @@ free(q);</code></pre>
 
 
 
-
-
-
-
-
-
-
+<h1 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h1>
             </div>
             <hr>
             <div>
@@ -543,6 +555,12 @@ free(q);</code></pre>
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/01/21/vulnstack-%E7%BA%A2%E9%98%9F%E4%B8%80/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vulnstack 红队一</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
